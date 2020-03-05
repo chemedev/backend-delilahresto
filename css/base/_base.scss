@@ -1,0 +1,125 @@
+// -----------------------------------------------------------------------------
+// This file contains very basic styles.
+// -----------------------------------------------------------------------------
+html {
+	box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+	font-family: 'Noto Sans Kr', sans-serif;
+}
+
+body {
+	width: 360px;
+	height: 100vh;
+}
+
+header {
+	background-color: $color-primary;
+	height: 15%;
+}
+
+h1 {
+	display: block;
+	margin: 0 auto;
+	color: white;
+	font-size: 1.5em;
+	height: 111px;
+	line-height: 111px;
+	text-align: center;
+	font-family: 'Fredoka One', sans-serif;
+}
+
+main {
+	display: flex;
+	flex-direction: column;
+	height: 85%;
+}
+
+label {
+	display: block;
+	color: $text-light;
+	font-size: 0.75em;
+}
+
+.btn {
+	background-color: $color-accents;
+	border: none;
+	display: block;
+	color: #ffffff;
+	font-size: 1em;
+	line-height: 1em;
+	padding: 1em;
+	cursor: pointer;
+	border-radius: 50px;
+	text-transform: uppercase;
+}
+
+.formlogin {
+	height: 50%;
+	padding-top: 50px;
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	@include element('input') {
+		width: 90%;
+		height: 3rem;
+		border: 1px solid $light-grey;
+		padding-left: 5px;
+		color: $text-light;
+	}
+	@include element('label') {
+		width: 90%;
+		margin: 1em 0 0.3em 0;
+	}
+}
+
+.wrapperlogin {
+	display: flex;
+	align-items: center;
+	padding-top: 50px;
+	height: 50%;
+	flex-flow: column;
+	@include element('input') {
+		width: 200px;
+		@include on-event {
+			background-color: darken($color: $color-accents, $amount: 10);
+		}
+		@include modifier('signup') {
+			background-color: transparent;
+			color: $color-accents;
+			@include on-event {
+				background-color: transparent;
+				text-decoration: underline;
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+a {
+	color: $brand-color;
+	text-decoration: none;
+
+	@include on-event {
+		color: $text-color;
+		text-decoration: underline;
+	}
+}

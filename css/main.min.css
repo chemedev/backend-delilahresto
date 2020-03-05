@@ -1,0 +1,245 @@
+html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+main {
+  display: block;
+}
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+a {
+  background-color: transparent;
+}
+
+img {
+  border-style: none;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+}
+
+button,
+input {
+  overflow: visible;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+}
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+textarea {
+  overflow: auto;
+}
+
+[type="checkbox"],
+[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+[type="search"] {
+  -webkit-appearance: textfield;
+  outline-offset: -2px;
+}
+
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit;
+}
+
+[hidden] {
+  display: none;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  font-family: 'Noto Sans Kr', sans-serif;
+}
+
+body {
+  width: 360px;
+  height: 100vh;
+}
+
+header {
+  background-color: #3addda;
+  height: 15%;
+}
+
+h1 {
+  display: block;
+  margin: 0 auto;
+  color: white;
+  font-size: 1.5em;
+  height: 111px;
+  line-height: 111px;
+  text-align: center;
+  font-family: 'Fredoka One', sans-serif;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  height: 85%;
+}
+
+label {
+  display: block;
+  color: #606a70;
+  font-size: 0.75em;
+}
+
+.btn {
+  background-color: #fc885c;
+  border: none;
+  display: block;
+  color: #ffffff;
+  font-size: 1em;
+  line-height: 1em;
+  padding: 1em;
+  cursor: pointer;
+  border-radius: 50px;
+  text-transform: uppercase;
+}
+
+.formlogin {
+  height: 50%;
+  padding-top: 50px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.formlogin__input {
+  width: 90%;
+  height: 3rem;
+  border: 1px solid #ededed;
+  padding-left: 5px;
+  color: #606a70;
+}
+
+.formlogin__label {
+  width: 90%;
+  margin: 1em 0 0.3em 0;
+}
+
+.wrapperlogin {
+  display: flex;
+  align-items: center;
+  padding-top: 50px;
+  height: 50%;
+  flex-flow: column;
+}
+
+.wrapperlogin__input {
+  width: 200px;
+}
+
+.wrapperlogin__input:hover, .wrapperlogin__input:active, .wrapperlogin__input:focus {
+  background-color: #fb632a;
+}
+
+.wrapperlogin__input--signup {
+  background-color: transparent;
+  color: #fc885c;
+}
+
+.wrapperlogin__input--signup:hover, .wrapperlogin__input--signup:active, .wrapperlogin__input--signup:focus {
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+a {
+  color: #e50050;
+  text-decoration: none;
+}
+
+a:hover, a:active, a:focus {
+  color: #222222;
+  text-decoration: underline;
+}
+
+/**
+ * Basic typography style for copy text
+ */
+.container {
+  max-width: 1180px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 100%;
+}
+
+.hide-text {
+  overflow: hidden;
+  padding: 0;
+  text-indent: 101%;
+  white-space: nowrap;
+}
+
+.visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
