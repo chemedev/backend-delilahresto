@@ -11,6 +11,8 @@ function toggleClass(e, c) {
 	e.classList.toggle(c);
 }
 
+title.addEventListener('click', () => (location.href = 'index.html'));
+
 btnLoginLogin.addEventListener('click', () => {
 	toggleClass(main[0], 'visually-hidden');
 	toggleClass(main[2], 'visually-hidden');

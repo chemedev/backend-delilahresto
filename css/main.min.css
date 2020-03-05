@@ -123,6 +123,7 @@ header {
 }
 
 h1 {
+  cursor: pointer;
   display: block;
   margin: 0 auto;
   color: white;
