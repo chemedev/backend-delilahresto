@@ -127,10 +127,15 @@ h1 {
   margin: 0 auto;
   color: white;
   font-size: 1.5em;
-  height: 111px;
-  line-height: 111px;
+  height: 60px;
+  line-height: 60px;
   text-align: center;
   font-family: 'Fredoka One', sans-serif;
+}
+
+.homepageSize {
+  height: 111px;
+  line-height: 111px;
 }
 
 main {
@@ -179,7 +184,7 @@ label {
   margin: 1em 0 0.3em 0;
 }
 
-.wrapperlogin {
+.wrapper {
   display: flex;
   align-items: center;
   padding-top: 50px;
@@ -187,22 +192,64 @@ label {
   flex-flow: column;
 }
 
-.wrapperlogin__input {
+.wrapper__input {
   width: 200px;
 }
 
-.wrapperlogin__input:hover, .wrapperlogin__input:active, .wrapperlogin__input:focus {
+.wrapper__input:hover, .wrapper__input:active, .wrapper__input:focus {
   background-color: #fb632a;
 }
 
-.wrapperlogin__input--signup {
+.wrapper__input--signup {
   background-color: transparent;
   color: #fc885c;
 }
 
-.wrapperlogin__input--signup:hover, .wrapperlogin__input--signup:active, .wrapperlogin__input--signup:focus {
+.wrapper__input--signup:hover, .wrapper__input--signup:active, .wrapper__input--signup:focus {
   background-color: transparent;
   text-decoration: underline;
+}
+
+h5 {
+  color: #606a70;
+  margin: 1em 0 1em 0.5em;
+}
+
+.dishes {
+  display: grid;
+  row-gap: 2em;
+  grid-template-columns: repeat(auto-fit, 75px 1fr 50px);
+}
+
+.dishes__dish {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.dishes__dish__img {
+  width: 75px;
+  height: 75px;
+}
+
+.dishes__dish__name {
+  width: 200px;
+  margin: 0;
+}
+
+.dishes__dish__price {
+  color: #606a70;
+  margin: 0;
+}
+
+.material-icons {
+  color: #fc885c;
+  font-size: 36px;
+}
+
+.material-icons:hover, .material-icons:active, .material-icons:focus {
+  cursor: pointer;
+  color: #fb632a;
 }
 
 a {
