@@ -11,6 +11,7 @@ const btnLoginSignup = document.querySelector('#loginSignup');
 const btnSignupCancel = document.querySelector('#signupCancel');
 const btnAdd = document.querySelectorAll('.material-icons');
 const wrapperFixed = document.querySelector('.wrapper--fixed');
+const btnOrderAdd = document.querySelector('#orderAdd');
 
 //! Generic class changer function
 function toggleClass(e, c) {
@@ -40,6 +41,11 @@ btnSignupCancel.addEventListener('click', () => {
 	toggleClass(header, 'homepageHeader');
 	toggleClass(main, 'homepageMain');
 	toggleClass(mainDivs[1], 'visually-hidden');
+});
+
+btnOrderAdd.addEventListener('click', () => {
+	toggleClass(mainDivs[2], 'visually-hidden');
+	toggleClass(mainDivs[3], 'visually-hidden');
 });
 
 //! Listeners => add/remove dishes
