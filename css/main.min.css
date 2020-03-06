@@ -109,40 +109,60 @@ html {
 *::after {
   box-sizing: inherit;
   font-family: 'Noto Sans Kr', sans-serif;
+  user-select: none;
 }
 
 body {
   display: flex;
   flex-flow: column;
   max-width: 640px;
+  height: 100vh;
 }
 
 header {
   background-color: #3addda;
-  height: 15%;
+  height: 60px;
+  line-height: 60px;
 }
 
 h1 {
   cursor: pointer;
   display: block;
   margin: 0 auto;
-  color: white;
+  color: #ffffff;
   font-size: 1.5em;
-  height: 60px;
-  line-height: 60px;
   text-align: center;
   font-family: 'Fredoka One', sans-serif;
 }
 
-.homepageSize {
-  height: 111px;
-  line-height: 111px;
+.homepageHeader {
+  height: 110px;
+  line-height: 110px;
 }
 
 main {
   display: flex;
   flex-direction: column;
-  height: 85%;
+  height: 680px;
+}
+
+.homepageMain {
+  height: 630px;
+}
+
+.mainDivs {
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-evenly;
+}
+
+.mainDivs--unjustified {
+  justify-content: unset;
+}
+
+.mainDivs--arounded {
+  justify-content: space-around;
 }
 
 label {
@@ -165,8 +185,6 @@ label {
 }
 
 .formlogin {
-  height: 50%;
-  padding-top: 50px;
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -188,9 +206,9 @@ label {
 .wrapper {
   display: flex;
   align-items: center;
-  padding-top: 50px;
-  height: 50%;
+  justify-content: center;
   flex-flow: column;
+  transition: 0.5s;
 }
 
 .wrapper__input {
@@ -202,18 +220,29 @@ label {
 }
 
 .wrapper__input--signup {
-  background-color: transparent;
   color: #fc885c;
+  background-color: transparent;
 }
 
 .wrapper__input--signup:hover, .wrapper__input--signup:active, .wrapper__input--signup:focus {
-  background-color: transparent;
   text-decoration: underline;
+  background-color: transparent;
+}
+
+.wrapper--fixed {
+  position: absolute;
+  height: 75px;
+  width: 100%;
+  bottom: -50px;
+  left: 50%;
+  transform: translate(-50%, -50px);
+  overflow: hidden;
+  z-index: 1;
 }
 
 h5 {
   color: #606a70;
-  margin: 1em 0 1em 0.5em;
+  margin: 1em 0 0.5em 0;
 }
 
 .dishes {
@@ -224,8 +253,13 @@ h5 {
 
 .dishes__dish {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 0 1rem;
   align-items: center;
+}
+
+.dishes__dish--last {
+  margin-bottom: 2rem;
 }
 
 .dishes__dish__img {
@@ -246,6 +280,11 @@ h5 {
 .material-icons {
   color: #fc885c;
   font-size: 36px;
+  transition: 0.1s;
+}
+
+.material-icons--small {
+  font-size: 16px;
 }
 
 .material-icons:hover, .material-icons:active, .material-icons:focus {
@@ -253,14 +292,66 @@ h5 {
   color: #fb632a;
 }
 
-a {
-  color: #e50050;
-  text-decoration: none;
+.material-icons--cancel {
+  color: #3addda;
 }
 
-a:hover, a:active, a:focus {
+.material-icons--cancel:hover, .material-icons--cancel:active, .material-icons--cancel:focus {
+  cursor: pointer;
+  color: #22c2bf;
+}
+
+.details {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.details__item {
+  width: 100%;
+  margin-bottom: 50px;
+  padding: 0 1rem;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown__btn {
+  padding: 0;
+  border: none;
+  cursor: pointer;
   color: #222222;
-  text-decoration: underline;
+  background-color: transparent;
+}
+
+.dropdown__content {
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown__content span {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown__content span:hover {
+  cursor: pointer;
+  background-color: #3addda;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown__content {
+  display: block;
 }
 
 /**

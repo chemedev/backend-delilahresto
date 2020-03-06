@@ -9,13 +9,12 @@
 		<link rel="stylesheet" href="css/main.min.css" />
 	</head>
 	<body>
-		<header>
-			<h1 class="homepageSize">Delilah Restó</h1>
-			<!-- <h1>Delilah Restó</h1> -->
+		<header class="homepageHeader">
+			<h1>Delilah Restó</h1>
 		</header>
-		<main>
-			<div class="mainDivs">
-			<!-- <div class="mainDivs visually-hidden"> -->
+		<main class="homepageMain">
+			<!-- <div class="mainDivs"> -->
+			<div class="mainDivs visually-hidden">
 				<form action="" class="formlogin">
 					<label class="formlogin__label" for="email">Usuario o correo electrónico</label>
 					<input class="formlogin__input" type="email" name="" id="email" />
@@ -27,7 +26,7 @@
 					<input id="loginSignup" class="btn wrapper__input wrapper__input--signup" type="button" value="Registrarse" />
 				</div>
 			</div>
-			<div class="mainDivs visually-hidden">
+			<div class="mainDivs mainDivs--arounded visually-hidden">
 				<form action="" class="formlogin">
 					<label class="formlogin__label" for="user">Usuario</label>
 					<input class="formlogin__input" type="text" name="" id="user" />
@@ -47,7 +46,8 @@
 					<input id="signupCancel" class="btn wrapper__input wrapper__input--signup" type="button" value="Cancelar" />
 				</div>
 			</div>
-			<div class="mainDivs visually-hidden">
+			<div class="mainDivs mainDivs--unjustified visually-hidden">
+				<!-- <div class="mainDivs"> -->
 				<!-- <h5>Tus favoritos</h5> -->
 				<h5>Nuestros platos</h5>
 				<div class="dishes">
@@ -66,7 +66,6 @@
 							<p class="dishes__dish__price">$350</p>
 						</div>
 						<i class="material-icons">add_circle</i>
-						<!-- <i class="material-icons">done_outline</i> -->
 					</div>
 					<div class="dishes__dish">
 						<img class="dishes__dish__img" src="img/veggieSandwich.jpg" alt="" />
@@ -84,6 +83,55 @@
 						</div>
 						<i class="material-icons">add_circle</i>
 					</div>
+				</div>
+				<div class="wrapper wrapper--fixed visually-hidden">
+					<input id="orderAdd" class="btn wrapper__input" type="button" value="Agregar a mi pedido" />
+				</div>
+			</div>
+			<div class="mainDivs mainDivs--unjustified">
+				<h5>Detalle</h5>
+				<div class="dishes">
+					<div class="dishes__dish">
+						<img class="dishes__dish__img" src="img/salmonBagel.jpg" alt="" />
+						<div>
+							<p class="dishes__dish__name">Bagel de Salmón</p>
+							<p class="dishes__dish__price">$425</p>
+						</div>
+						<i class="material-icons material-icons--cancel">cancel</i>
+					</div>
+					<div class="dishes__dish dishes__dish--last">
+						<img class="dishes__dish__img" src="img/classicBurger.jpg" alt="" />
+						<div>
+							<p class="dishes__dish__name">Hamburguesa clásica</p>
+							<p class="dishes__dish__price">$350</p>
+						</div>
+						<i class="material-icons material-icons--cancel">cancel</i>
+					</div>
+				</div>
+				<div class="details">
+					<span class="details__item">Total: $775</span>
+					<div class="details__item">
+						<h5>Forma de pago</h5>
+						<div class="dropdown">
+							<button class="dropdown__btn">
+								Efectivo
+								<i class="material-icons material-icons--small">arrow_drop_down</i>
+							</button>
+							<div class="dropdown__content">
+								<span>Efectivo</span>
+								<span>Débito</span>
+								<span>MercadoPago</span>
+								<span>Crédito</span>
+							</div>
+						</div>
+					</div>
+					<div class="details__item">
+						<h5>Dirección</h5>
+						<span>1 Logan PlKensington, London W8 6DE, UK</span>
+					</div>
+				</div>
+				<div class="wrapper">
+					<input id="signupCreate" class="btn wrapper__input" type="button" value="Confirmar Pedido" />
 				</div>
 			</div>
 		</main>
