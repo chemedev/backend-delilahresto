@@ -233,6 +233,33 @@ h5 {
 	display: block;
 }
 
+.successfulOrder {
+	align-items: center;
+	justify-content: space-around;
+	@include element('wrapper') {
+		display: flex;
+		flex-flow: column;
+		align-items: center;
+		justify-content: space-between;
+		height: 100px;
+	}
+	@include element('img') {
+		width: 80%;
+	}
+	@include element('p') {
+		text-align: center;
+		margin: 0;
+		width: 70%;
+		color: $text-light;
+		font-size: 1em;
+	}
+}
+
+h2 {
+	font-size: 1.7em;
+	margin: 0;
+}
+
 // a {
 // 	color: $brand-color;
 // 	text-decoration: none;

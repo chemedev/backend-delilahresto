@@ -10,10 +10,11 @@
 	</head>
 	<body>
 		<header class="homepageHeader">
+		<!-- <header> -->
 			<h1>Delilah Restó</h1>
 		</header>
 		<main class="homepageMain">
-			<!-- <div class="mainDivs"> -->
+		<!-- <main> -->
 			<div class="mainDivs">
 				<form action="" class="formlogin">
 					<label class="formlogin__label" for="email">Usuario o correo electrónico</label>
@@ -47,7 +48,6 @@
 				</div>
 			</div>
 			<div class="mainDivs mainDivs--unjustified visually-hidden">
-				<!-- <div class="mainDivs"> -->
 				<!-- <h5>Tus favoritos</h5> -->
 				<h5>Nuestros platos</h5>
 				<div class="dishes">
@@ -131,7 +131,19 @@
 					</div>
 				</div>
 				<div class="wrapper">
-					<input id="signupCreate" class="btn wrapper__input" type="button" value="Confirmar Pedido" />
+					<input id="detailConfirm" class="btn wrapper__input" type="button" value="Confirmar Pedido" />
+				</div>
+			</div>
+			<div class="mainDivs successfulOrder visually-hidden">
+				<img class="successfulOrder__img" src="./img/mobile_user.svg" alt="user waiting" />
+				<div class="successfulOrder__wrapper">
+					<h2>¡Recibimos tu pedido!</h2>
+					<p class="successfulOrder__p">
+						<span>Freddie</span>, gracias por pedir a Delilah. Puedes seguir tu pedido para saber dónde está.
+					</p>
+				</div>
+				<div class="wrapper">
+					<input id="successfulFollow" class="btn wrapper__input" type="button" value="Seguir Pedido" />
 				</div>
 			</div>
 		</main>

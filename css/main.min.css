@@ -354,18 +354,39 @@ h5 {
   display: block;
 }
 
+.successfulOrder {
+  align-items: center;
+  justify-content: space-around;
+}
+
+.successfulOrder__wrapper {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100px;
+}
+
+.successfulOrder__img {
+  width: 80%;
+}
+
+.successfulOrder__p {
+  text-align: center;
+  margin: 0;
+  width: 70%;
+  color: #606a70;
+  font-size: 1em;
+}
+
+h2 {
+  font-size: 1.7em;
+  margin: 0;
+}
+
 /**
  * Basic typography style for copy text
  */
-.container {
-  max-width: 1180px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 20px;
-  padding-right: 20px;
-  width: 100%;
-}
-
 .hide-text {
   overflow: hidden;
   padding: 0;
