@@ -34,9 +34,14 @@ app.post('/contact', (req, res) => {
 
 let items = [
 	{
-		id: 10,
-		title: 'No sé pero es la 10',
-		completed: true
+		id: 1,
+		title: 'Esta es una tarea',
+		completed: false
+	},
+	{
+		id: 2,
+		title: 'Esta es otra tarea',
+		completed: false
 	}
 ];
 

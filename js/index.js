@@ -15,6 +15,8 @@ const btnOrderAdd = document.querySelector('#orderAdd');
 const btnConfirm = document.querySelector('#detailConfirm');
 const btnDelete = document.querySelectorAll('.material-icons--cancel');
 const btnFollow = document.querySelector('#successfulFollow');
+const statusCircles = document.querySelectorAll('.circle');
+const statusItems = document.querySelectorAll('.status__item');
 
 //! Generic class changer function
 function toggleClass(e, c) {
@@ -87,3 +89,12 @@ for (const btn of btnAdd) {
 for (const btn of btnDelete) {
 	btn.addEventListener('click', () => btn.parentNode.remove());
 }
+
+//! Listeners => change status on click
+
+statusCircles.forEach((circle, index) => {
+	circle.addEventListener('click', () => {
+		statusItems.forEach(e => e.classList.remove('status__item--active'));
+		toggleClass(statusItems[index], 'status__item--active');
+	});
+});
