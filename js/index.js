@@ -69,6 +69,11 @@ btnFollow.addEventListener('click', () => {
 	icons.forEach(icon => {
 		toggleClass(icon, 'visually-hidden');
 	});
+
+	const statusTitle = document.querySelector('.statusTitle');
+	toggleClass(statusTitle, 'visually-hidden');
+	const statusDiv = document.querySelector('.status');
+	toggleClass(statusDiv, 'visually-hidden');
 });
 
 //! Listeners => add/remove dishes
