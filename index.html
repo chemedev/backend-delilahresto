@@ -15,7 +15,7 @@
 		</header>
 		<main class="homepageMain">
 			<!-- <main> -->
-			<div class="mainDivs">
+			<div class="mainDivs visually-hidden">
 				<form action="" class="formlogin">
 					<label class="formlogin__label" for="email">Usuario o correo electrónico</label>
 					<input class="formlogin__input" type="email" name="" id="email" />
@@ -111,8 +111,27 @@
 					<input id="orderAdd" class="btn wrapper__input" type="button" value="Agregar a mi pedido" />
 				</div>
 			</div>
-			<div class="mainDivs mainDivs--unjustified visually-hidden">
-				<h5>Detalle</h5>
+			<div class="mainDivs mainDivs--unjustified">
+				<h5 class="--padded">Estado</h5>
+				<div class="status">
+					<div class="status__item  status__item--active">
+						<div class="circle"></div>
+						<span class="status__item__span">Confirmado</span>
+					</div>
+					<div class="status__item">
+						<div class="circle circle--withBar"></div>
+						<span class="status__item__span">En preparación</span>
+					</div>
+					<div class="status__item">
+						<div class="circle circle--withBar"></div>
+						<span class="status__item__span">En camino</span>
+					</div>
+					<div class="status__item">
+						<div class="circle circle--withBar"></div>
+						<span class="status__item__span">Entregado</span>
+					</div>
+				</div>
+				<h5 class="--padded">Detalle</h5>
 				<div class="dishes">
 					<div class="dishes__dish">
 						<img class="dishes__dish__img" src="img/salmonBagel.jpg" alt="" />
@@ -157,6 +176,7 @@
 					<input id="detailConfirm" class="btn wrapper__input" type="button" value="Confirmar Pedido" />
 				</div>
 			</div>
+
 			<div class="mainDivs successfulOrder visually-hidden">
 				<img class="successfulOrder__img" src="./img/mobile_user.svg" alt="user waiting" />
 				<div class="successfulOrder__wrapper">
