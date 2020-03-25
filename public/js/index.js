@@ -24,7 +24,7 @@ function toggleClass(e, c) {
 }
 
 //! Header => Homepage
-header.addEventListener('click', () => (location.href = 'index.html'));
+header.addEventListener('click', () => (location.href = '/'));
 
 //! Main Sections SHOW/HIDE
 btnLoginLogin.addEventListener('click', () => {

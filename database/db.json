@@ -1,0 +1,63 @@
+{
+	"products": [
+		{
+			"id": 1,
+			"description": "Bagel de salmón",
+			"price": 425
+		},
+		{
+			"id": 2,
+			"description": "Hamburguesa clásica",
+			"price": 350
+		}
+	],
+	"users": [
+		{
+			"id": 1,
+			"fullname": "Juan Chemello",
+			"username": "mechell",
+			"password": "juancito",
+			"email": "juanchemell@gmail.com",
+			"mobile": "+543412291938",
+			"address": "Paraguay 1141 1 D"
+		},
+		{
+			"id": 2,
+			"fullname": "Solange Toledo",
+			"username": "soltoled",
+			"password": "solcito",
+			"email": "soltoled@gmail.com",
+			"mobile": "+543412281741",
+			"address": "Paraguay 1141 1 D"
+		}
+	],
+	"orders": [
+		{
+			"id": 1,
+			"status": "Nuevo",
+			"time": "12.30PM",
+			"description": "1xHamClas 1xSandVegg",
+			"payment": "cash",
+			"total": 660,
+			"userId": 1
+		},
+		{
+			"id": 2,
+			"status": "Entregado",
+			"time": "9.20AM",
+			"description": "1xHamClas",
+			"payment": "debit",
+			"total": 2000,
+			"userId": 2
+		},
+		{
+			"id": 3,
+			"status": "En preparación",
+			"time": "4.05PM",
+			"description": "1xSandVegg",
+			"payment": "cash",
+			"total": 400,
+			"userId": 2
+		}
+	]
+}

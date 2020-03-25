@@ -331,7 +331,7 @@ h2 {
 			color: $color-accents;
 			font-weight: bold;
 		}
-		@include modifier('active ~ div div') {
+		@include modifier('act~ive  div div') {
 			background-color: white;
 			border-color: gray;
 			&::before {

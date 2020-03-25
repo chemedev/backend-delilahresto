@@ -466,12 +466,12 @@ h2 {
   font-weight: bold;
 }
 
-.status__item--active ~ div div {
+.status__item--act ~ ive div div {
   background-color: white;
   border-color: gray;
 }
 
-.status__item--active ~ div div::before {
+.status__item--act ~ ive div div::before {
   background-color: gray;
 }
 
