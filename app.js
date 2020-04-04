@@ -1,13 +1,16 @@
+//! MODULES
 const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 
+//! INIT
+const privateKey = fs.readFileSync('private.key').toString();
 
-//INIT
+const port = 3000;
 const app = express();
-app.listen(3000, console.log('Server UP on port 3000.'));
+app.listen(port, console.log(`Server UP on port ${port}.`));
 
-// HANDLER
+//! HANDLER
 let handleRequest = (req, res) => {
 	res.writeHead(200, {
 		'Content-Type': 'text/html'
@@ -23,14 +26,17 @@ let handleRequest = (req, res) => {
 	});
 };
 
-// MIDDLEWARES
+//! CONFIG
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
 
-function log (req, res, next) {
-	console.log(req.path, req.body, req.query);
-	next();
-}
+// function log (req, res, next) {
+// 	console.log(req.path, req.body, req.query);
+// 	next();
+// }
 
-// ROUTES
-app.get('/', log, handleRequest);
+//! ROUTES
+app.use(require('./src/routes/users'))
+app.use(require('./src/routes/products'))
+app.use(require('./src/routes/orders'))
+app.get('/', handleRequest);
