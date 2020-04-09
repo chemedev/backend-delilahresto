@@ -1,46 +1,71 @@
-const sequelize = require('../../database');
+const { sequelize } = require('../../database/database');
+const { privateKey } = require('../../src/private.key');
 const jwt = require('jsonwebtoken');
-const { privateKey } = require('../../private.key');
 
-function authUser(req, res, next) {
-	const header = req.headers.authorization;
-
-	if (header) {
-		const token = header.split(' ')[1];
-		jwt.verify(token, secret, (err, data) => {
-			if (data) {
-				req.user = data;
-				next();
-			} else {
-				res.status(401).json({ error: 'Invalid token.' });
-			}
-		});
-	} else {
-		res.status(401).json({ error: 'Null token.' });
-	}
+function isAdmin(req, res, next) {
+	if (!req.headers.authorization) return res.sendStatus(401);
+	let token = req.headers.authorization.split(' ')[1];
+	jwt.verify(token, privateKey, (err, data) => {
+		if (err) return res.status(400).send([{ err: err.message }]);
+		if (!data.is_admin) return res.sendStatus(401);
+		next();
+	});
 }
 
-async function alreadyLogged(req, res, next) {
-	const { token } = req.body;
-	if (!token) return next();
-	try {
-		username = jwt.verify(token, privateKey);
-		query = `SELECT * FROM users WHERE username = "${username}"`;
-		answer = await sequelize.query(query);
-		if (answer[0].length !== 0) res.json({ token: token });
-	} catch (err) {
-		res.status(401).json({ err });
-	}
+function isLogged(req, res, next) {
+	if (!req.headers.authorization) return res.sendStatus(401);
+	let token = req.headers.authorization.split(' ')[1];
+	jwt.verify(token, privateKey, async (err, data) => {
+		if (err) return res.status(400).send([{ err: err.message }]);
+		let query = `SELECT username FROM users WHERE id = ${data.id}`;
+		let answer = await sequelize.query(query);
+		if (!answer[0][0]) return res.sendStatus(401);
+		next();
+	});
 }
 
-async function isAdmin(req, res, next) {
-	const { username } = req.body;
-	query = `SELECT is_admin FROM users WHERE username = "${username}"`;
-	answer = await sequelize.query(query);
-	console.log(answer[0]);
-	if (answer[0].length !== 0) {
-		if (answer[0].isAdmin) return next();
-	}
+function isAccesingOwnData(req, res, next) {
+	if (!req.params.username) return res.sendStatus(400);
+	let token = req.headers.authorization.split(' ')[1];
+	jwt.verify(token, privateKey, async (err, data) => {
+		if (err) return res.status(400).send([{ err: err.message }]);
+		if (req.params.username !== data.username) return res.sendStatus(401);
+		next();
+	});
 }
 
-module.exports = { alreadyLogged, isAdmin };
+module.exports = { isAdmin, isLogged, isAccesingOwnData };
+
+// function authUser(req, res, next) {
+// 	const header = req.headers.authorization;
+
+// 	if (header) {
+// 		const token = header.split(' ')[1];
+// 		jwt.verify(token, secret, (err, data) => {
+// 			if (data) {
+// 				req.user = data;
+// 				next();
+// 			} else {
+// 				res.status(401).json({ err: 'Invalid token.' });
+// 			}
+// 		});
+// 	} else {
+// 		res.status(401).json({ err: 'Null token.' });
+// 	}
+// }
+
+// async function isLoggedIn(req, res, next) {
+// 	try {
+// 		console.log(req.headers);
+// 		if (req.headers.authorization !== '') {
+// 			const token = req.headers.authorization;
+// 			let username = jwt.verify(token, privateKey);
+// 			let query = `SELECT * FROM users WHERE username = "${username}"`;
+// 			let answer = await sequelize.query(query);
+// 			if (!answer[0]) return next();
+// 			return res.json([{ err: 'You are already logged.' }]);
+// 		} else return res.json({ err: 'Not logged in.' });
+// 	} catch (err) {
+// 		res.status(401).json({ err });
+// 	}
+// }

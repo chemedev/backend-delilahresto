@@ -1,50 +1,90 @@
 const express = require('express');
-const router = express.Router();
-const helpers = require('../lib/helpers');
-const sequelize = require('../../database');
+const { sequelize } = require('../../database/database');
+const Router = express.Router();
+const { isAdmin, isLogged } = require('../lib/helpers');
 
 //! ROUTES /PRODUCTS
-router.get('/products', async (req, res) => {
-	const query = 'SELECT * FROM products WHERE is_deleted = 0';
-	const answer = await sequelize.query(query);
-	res.status(200).send(answer[0]);
+
+Router.get('/products', isLogged, async (_req, res) => {
+	try {
+		const query =
+			'SELECT id, description, picture, price FROM products WHERE is_deleted = 0';
+		const answer = await sequelize.query(query);
+		res.send(answer[0]);
+	} catch {
+		res.sendStatus(500);
+	}
 });
 
-router.post('/products', async (req, res) => {
-	let answer;
-	let product = req.body;
-	let query = `INSERT INTO products (description, picture, price) VALUES("${product.description}", "${product.picture}", "${product.price}");`;
-	[answer] = await sequelize.query(query);
-	query = `SELECT * FROM products WHERE id = ${answer}`;
-	answer = await sequelize.query(query);
-	res.status(201).json(answer[0]);
+Router.post('/products', isAdmin, async (req, res) => {
+	try {
+		let answer;
+		let { description, picture, price } = req.body;
+		if (!description || !picture || !price) return res.sendStatus(400);
+		let query = `INSERT INTO products (description, picture, price) VALUES("${description}", "${picture}", "${price}");`;
+		[answer] = await sequelize.query(query);
+		query = `SELECT id, description, picture, price FROM products WHERE id = ${answer}`;
+		answer = await sequelize.query(query);
+		res.status(201).json(answer[0]);
+	} catch {
+		res.status(500);
+	}
 });
 
-router.get('/products/:id', async (req, res) => {
-	let { id } = req.params;
-	const query = `SELECT * FROM products WHERE id = ${id} AND is_deleted = 0`;
-
-	const answer = await sequelize.query(query);
-	res.status(200).send(answer[0]);
+Router.get('/products/:id', isLogged, async (req, res) => {
+	try {
+		let { id } = req.params;
+		let regex = new RegExp('^[0-9]+$');
+		if (!regex.test(id)) return res.sendStatus(400);
+		const query = `SELECT description, picture, price, created_at FROM products WHERE id = ${id} AND is_deleted = 0`;
+		const answer = await sequelize.query(query);
+		let date = new Date(answer[0][0].created_at);
+		date = date.toLocaleString();
+		console.log(date);
+		console.log(answer[0][0].created_at);
+		if (!answer[0][0]) return res.sendStatus(404);
+		res.send(answer[0]);
+	} catch {
+		res.status(500);
+	}
 });
 
-router.put('/products/:id', async (req, res) => {
-	let { id } = req.params;
-	let product = req.body;
-	let query = `UPDATE products SET description = "${product.description}",	picture = "${product.picture}",	price = "${product.price}" WHERE id = "${id}"`;
-	await sequelize.query(query);
-
-	query = `SELECT * FROM products WHERE id = ${id} AND is_deleted = 0`;
-	const answer = await sequelize.query(query);
-
-	res.status(200).send(answer[0]);
+Router.put('/products/:id', isAdmin, async (req, res) => {
+	try {
+		let { id } = req.params;
+		let regex = new RegExp('^[0-9]+$');
+		if (!regex.test(id)) return res.sendStatus(400);
+		let { description, picture, price } = req.body;
+		if (!description || !picture || !price) return res.sendStatus(400);
+		let query = `SELECT * FROM products WHERE id = ${id}`;
+		let answer = await sequelize.query(query);
+		if (!answer[0][0]) return res.sendStatus(404);
+		query = `UPDATE products SET description = "${description}",	picture = "${picture}",	price = "${price}" WHERE id = "${id}"`;
+		[answer] = await sequelize.query(query);
+		if (!answer.changedRows)
+			return res.status(409).send([{ err: 'Nothing changed.' }]);
+		query = `SELECT description, picture, price FROM products WHERE id = ${id} AND is_deleted = 0`;
+		answer = await sequelize.query(query);
+		res.send(answer[0]);
+	} catch {
+		res.status(500);
+	}
 });
 
-router.delete('/products/:id', async (req, res) => {
-	let { id } = req.params;
-	const query = `UPDATE products SET is_deleted = 1 WHERE id = ${id}`;
-	await sequelize.query(query);
-	res.sendStatus(204);
+Router.delete('/products/:id', isAdmin, async (req, res) => {
+	try {
+		let { id } = req.params;
+		let regex = new RegExp('^[0-9]+$');
+		if (!regex.test(id)) return res.sendStatus(400);
+		let query = `SELECT is_deleted FROM products WHERE id = ${id} AND is_deleted = 0`;
+		let answer = await sequelize.query(query);
+		if (!answer[0][0]) return res.sendStatus(404);
+		query = `UPDATE products SET is_deleted = 1 WHERE id = ${id}`;
+		await sequelize.query(query);
+		res.sendStatus(204);
+	} catch {
+		res.status(500);
+	}
 });
 
-module.exports = router;
+module.exports = Router;

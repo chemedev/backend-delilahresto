@@ -2,9 +2,9 @@
   "name": "delilah-resto",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "src/",
   "scripts": {
-    "start": "nodemon"
+    "dev": "nodemon"
   },
   "repository": {
     "type": "git",
