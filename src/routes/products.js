@@ -36,15 +36,11 @@ Router.get('/products/:id', isLogged, async (req, res) => {
 		let { id } = req.params;
 		let regex = new RegExp('^[0-9]+$');
 		if (!regex.test(id)) return res.sendStatus(400);
-		const query = `SELECT description, picture, price, created_at FROM products WHERE id = ${id} AND is_deleted = 0`;
+		const query = `SELECT description, picture, price FROM products WHERE id = ${id} AND is_deleted = 0`;
 		const answer = await sequelize.query(query);
-		let date = new Date(answer[0][0].created_at);
-		date = date.toLocaleString();
-		console.log(date);
-		console.log(answer[0][0].created_at);
 		if (!answer[0][0]) return res.sendStatus(404);
 		res.send(answer[0]);
-	} catch {
+	} catch (e) {
 		res.status(500);
 	}
 });

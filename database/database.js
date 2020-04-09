@@ -12,7 +12,7 @@ function sql(query, ...params) {
 			replacements: [...params],
 			type: sequelize.QueryTypes.SELECT,
 		})
-		.catch((e) => console.log({ Query: e.sql, Message: e.message }));
+		.catch((e) => console.log({e, Query: e.sql, Message: e.message }));
 }
 
 sequelize
@@ -25,6 +25,7 @@ sequelize
 		console.log('Users:', await sql('SELECT COUNT(*) FROM users'));
 		console.log('Products', await sql('SELECT COUNT(*) FROM products'));
 		console.log('Orders', await sql('SELECT COUNT(*) FROM orders'));
+		console.log('Details', await sql('SELECT COUNT(*) FROM order_details'));
 	} catch (err) {
 		console.log('Hubo un error:', err.message);
 	}

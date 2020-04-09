@@ -51,7 +51,7 @@ Router.get(
 			let regex = new RegExp('^[\\w]+$');
 			if (!regex.test(username)) return res.sendStatus(400);
 			const answer = await sql(
-				'SELECT username, fullname, email, mobile, address FROM users WHERE username = ? AND is_deleted = 0',
+				'SELECT id, username, fullname, email, mobile, address FROM users WHERE username = ? AND is_deleted = 0',
 				username
 			);
 			// if (!answer[0]) return res.sendStatus(404);		//! No hace falta comprobar...
@@ -68,34 +68,20 @@ Router.put(
 	isAccesingOwnData,
 	async (req, res) => {
 		try {
-			let { username } = req.params;
+			let paramUsername = req.params.username;
 			let regex = new RegExp('^[\\w]+$');
-			if (!regex.test(username)) return res.sendStatus(400);
-			let {
-				usernameBody,
-				fullname,
-				email,
-				mobile,
-				address,
-				password,
-			} = req.body;
-			if (
-				!usernameBody ||
-				!fullname ||
-				!email ||
-				!mobile ||
-				!address ||
-				!password
-			)
+			if (!regex.test(paramUsername)) return res.sendStatus(400);
+			let { username, fullname, email, mobile, address, password } = req.body;
+			if (!username || !fullname || !email || !mobile || !address || !password)
 				return res.sendStatus(400);
-			let query = `SELECT * FROM users WHERE username = ${username} AND is_deleted = 0`;
+			let query = `SELECT * FROM users WHERE username = "${paramUsername}" AND is_deleted = 0`;
 			let answer = await sequelize.query(query);
 			if (!answer[0][0]) return res.sendStatus(404);
-			query = `UPDATE users SET username = "${usernameBody}",	fullname = "${fullname}",	email = "${email}", mobile = "${mobile}", address = "${address}", password = "${password}"  WHERE username = "${username}"`;
+			query = `UPDATE users SET username = "${username}",	fullname = "${fullname}",	email = "${email}", mobile = "${mobile}", address = "${address}", password = "${password}"  WHERE username = "${paramUsername}"`;
 			[answer] = await sequelize.query(query);
 			if (!answer.changedRows)
 				return res.status(409).send([{ err: 'Nothing changed.' }]);
-			query = `SELECT * FROM users WHERE username = ${usernameBody}`;
+			query = `SELECT * FROM users WHERE username = "${paramUsername}"`;
 			answer = await sequelize.query(query);
 			res.send(answer[0]);
 		} catch {
