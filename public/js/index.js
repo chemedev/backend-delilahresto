@@ -17,7 +17,7 @@
 					'https://mechell-delilah.herokuapp.com/products',
 					{
 						headers: {
-							Authorization: `bearer ${localStorage.getItem('token')}`, //! HARDCODED HARDCODED HARDCODED
+							Authorization: `bearer ${localStorage.getItem('token')}`,
 						},
 					}
 				).then((res) => res.json());
@@ -272,8 +272,8 @@
 		);
 		const spanAddress = document.querySelector('#spanAddress');
 		const spanTotal = document.querySelector('#spanTotal');
-		fetch('https://mechell-delilah.herokuapp.com/users/mechell', {
-			//! HARDCODED
+		let username = localStorage.username;
+		fetch(`https://mechell-delilah.herokuapp.com/users/${username}`, {
 			headers: {
 				Authorization: `Bearer ${localStorage.getItem('token')}`,
 			},
@@ -281,7 +281,7 @@
 			.then((res) => res.json())
 			.then((data) => {
 				localStorage.setItem('id', data[0].id);
-				spanAddress.innerHTML = data[0].address;
+				spanAddress.innerHTML = localStorage.getItem('address');
 			});
 		const dishesDiv = Array.from(document.querySelector('.dishes').children);
 		let child = '';
