@@ -10,11 +10,12 @@ const { isAdmin, isLogged, isAccesingOwnData } = require('../lib/helpers');
 //! ROUTES /USERS
 
 Router.post('/users', async (req, res) => {
+	let query, user, payload;
 	try {
 		let { username, fullname, email, mobile, address, password } = req.body;
 		if (!username || !fullname || !email || !mobile || !address || !password)
 			return res.sendStatus(400);
-		let query = `SELECT username, email, mobile FROM users WHERE is_deleted = 0 && (email = "${email}" || mobile = "${mobile}" || username = "${username}")`;
+		query = `SELECT username, email, mobile FROM users WHERE is_deleted = 0 && (email = "${email}" || mobile = "${mobile}" || username = "${username}")`;
 		let answer = await sequelize.query(query);
 		if (answer[0][0])
 			return res
@@ -22,8 +23,16 @@ Router.post('/users', async (req, res) => {
 				.send([{ err: 'Email, username or mobile already used.' }]);
 		query = `INSERT INTO users (username, fullname, email, mobile, address, password) VALUES("${username}", "${fullname}", "${email}", "${mobile}", "${address}", "${password}");`;
 		answer = await sequelize.query(query);
-		query = `SELECT username, fullname, email, mobile, address FROM users WHERE id = ${answer[0]}`;
+		query = `SELECT username, fullname, email, mobile, address FROM users WHERE id = "${answer[0]}"`;
 		answer = await sequelize.query(query);
+		user = answer[0][0];
+		payload = {
+			id: user.id,
+			username: username,
+			is_admin: user.is_admin,
+		};
+		const token = jwt.sign(payload, privateKey);
+		res.set('Authorization', `Bearer ${token}`);
 		res.status(201).json(answer[0]);
 	} catch {
 		res.sendStatus(500);
@@ -90,6 +99,56 @@ Router.put(
 	}
 );
 
+Router.get(
+	'/users/:username/favorites',
+	isLogged,
+	isAccesingOwnData,
+	async (req, res) => {
+		try {
+			let paramUsername = req.params.username;
+			let regex = new RegExp('^[\\w]+$');
+			if (!regex.test(paramUsername)) return res.sendStatus(400);
+			let query = `SELECT id FROM users WHERE username = "${paramUsername}" AND is_deleted = 0`;
+			// let answer = await sequelize.query(query);
+			let response;
+			await sequelize
+				.query('SELECT id FROM users WHERE username = ? AND is_deleted = 0', {
+					replacements: [paramUsername],
+					type: sequelize.QueryTypes.SELECT,
+				})
+				.then((data) => (response = data[0]))
+				.catch((e) => console.log({ e, Query: e.sql, Message: e.message }));
+
+			await sequelize
+				.query('SELECT product_id FROM favorites WHERE user_id = ?', {
+					replacements: [response.id],
+					type: sequelize.QueryTypes.SELECT,
+				})
+				.then((data) => (response = data))
+				.catch((e) => console.log({ e, Query: e.sql, Message: e.message }));
+
+			let send = [];
+
+			response.forEach((prod) => {
+				send.push(
+					sequelize.query(
+						'SELECT description, picture, price FROM products WHERE id = ?',
+						{
+							replacements: [prod.product_id],
+							type: sequelize.QueryTypes.SELECT,
+						}
+					).then(res => res[0])
+				);
+			});
+
+			Promise.all(send).then((data) => {
+				res.send(data)})
+		} catch {
+			res.sendStatus(500);
+		}
+	}
+);
+
 Router.delete('/users/:id', isAdmin, async (req, res) => {
 	try {
 		let { id } = req.params;
@@ -115,7 +174,7 @@ Router.post('/signin', async (req, res) => {
 	else
 		query = `SELECT id, is_admin, fullname, address FROM users WHERE email = "${email}" AND password = "${password}" AND is_deleted = 0`;
 	const answer = await sequelize.query(query);
-	if (!answer[0])
+	if (!answer[0][0])
 		return res.status(401).send([{ err: 'Invalid credentials.' }]);
 	user = answer[0][0];
 	payload = {
@@ -125,7 +184,9 @@ Router.post('/signin', async (req, res) => {
 	};
 	const token = jwt.sign(payload, privateKey);
 	res.set('Authorization', `Bearer ${token}`);
-	res.send([{ fullname: user.fullname, address: user.address }]);
+	res.send([
+		{ fullname: user.fullname, username: username, address: user.address },
+	]);
 });
 
 module.exports = Router;

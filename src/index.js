@@ -1,6 +1,7 @@
 //* MODULES
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 //* INIT
 const port = 3000;
@@ -8,6 +9,15 @@ const app = express();
 app.listen(port, console.log(`Server listening on port: ${port}`));
 
 //* CFG
+app.use(
+	cors({
+		origin: '*',
+		methods: 'GET,PUT,POST,DELETE',
+		preflightContinue: false,
+		optionsSuccessStatus: 204,
+		exposedHeaders: 'Authorization'
+	})
+);
 app.use(bodyParser.json());
 
 //? WELL-FORMED JSON ? NEXT() : { ERR }

@@ -66,7 +66,6 @@ Router.get(
 				username
 			);
 			if (!answer[0]) return res.sendStatus(404);
-
 			let id = answer[0].id;
 			let orders = [],
 				items = [],
@@ -89,6 +88,13 @@ Router.get(
 					buffer.items = items;
 					orders.push(buffer);
 					items = [];
+					buffer = {
+						id: order.id,
+						time: order.created_at,
+						user: order.fullname,
+						status: order.status,
+						payment: order.method,
+					};
 					items.push({
 						description: order.description,
 						quantity: order.quantity,
