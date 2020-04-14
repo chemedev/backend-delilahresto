@@ -7,7 +7,7 @@ const Sequelize = require('sequelize');
 // );
 
 const sequelize = new Sequelize(
-	`mysql://RdcociQlyU:gJjA7nvbKx@remotemysql.com:3306/RdcociQlyU`,
+	`mysql://RdcociQlyU:u2kCJJpGzL@remotemysql.com:3306/RdcociQlyU`,
 	{ logging: false }
 );
 
