@@ -1,8 +1,13 @@
 const { db } = require('./keys');
 const Sequelize = require('sequelize');
 
+// const sequelize = new Sequelize(
+// 	`mysql://${db.user}:${db.password}@${db.host}:3306/${db.database}`,
+// 	{ logging: false }
+// );
+
 const sequelize = new Sequelize(
-	`mysql://${db.user}:${db.password}@${db.host}:3306/${db.database}`,
+	`mysql://RdcociQlyU:gJjA7nvbKx@remotemysql.com:3306/RdcociQlyU`,
 	{ logging: false }
 );
 

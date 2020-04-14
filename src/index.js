@@ -5,8 +5,8 @@ const cors = require('cors');
 const fs = require('fs');
 
 //* INIT
-const port = 3000;
 const app = express();
+const port = process.env.PORT || 3000;
 app.listen(port, console.log(`Server listening on port: ${port}`));
 
 //! HANDLER

@@ -57,3 +57,29 @@ CREATE TABLE order_details(
 	FOREIGN KEY(order_id) REFERENCES orders(id),
 	FOREIGN KEY(product_id) REFERENCES products(id)
 ) AUTO_INCREMENT = 50000;
+
+CREATE TABLE favorites(
+	id INT NOT NULL AUTO_INCREMENT,
+	user_id INT,
+	product_id INT,
+	PRIMARY KEY(id),
+	FOREIGN KEY(user_id) REFERENCES users(id),
+	FOREIGN KEY(product_id) REFERENCES products(id)
+);
+
+INSERT INTO status (status)
+VALUES ('new'), ('confirmed'), ('preparing'), ('delivering'), ('canceled'), ('delivered');
+
+INSERT INTO payment (method)
+VALUES ('cash'), ('debit'), ('credit'), ('paypal'), ('mercadopago');
+
+INSERT INTO products (description,picture,price,is_deleted)
+VALUES
+('Bagel de salmón','/img/salmonBagel.jpg',425.00,0),
+('Hamburguesa clásica','/img/classicBurger.jpg',350.00,0),
+('Sandwich veggie','/img/veggieSandwich.jpg',310.00,0),
+('Ensalada veggie','/img/veggieSalad.jpg',340.00,0),
+('Veggie avocado','/img/veggieAvocado.jpg',310.00,0),
+('Focaccia BLT','/img/focacciaVLT.jpg',280.00,0),
+('Sandwich de queso','/img/cheeseSandwich.jpg',268.00,0),
+('Hamburguesa especial','/img/specialBurger.jpg',410.00,0);
