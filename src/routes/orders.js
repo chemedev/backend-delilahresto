@@ -21,6 +21,9 @@ Router.post('/orders', isLogged, async (req, res) => {
 						sequelize.query(
 							`INSERT INTO order_details (order_id, product_id, quantity) VALUES(${index[0]}, ${item.product_id}, ${item.quantity})`
 						);
+						sequelize.query(
+							`INSERT INTO favorites (user_id, product_id) VALUES (${order.user_id}, ${item.product_id})`
+						);
 					});
 				})
 		);
