@@ -70,6 +70,8 @@
 	var address = document.querySelector('#address');
 	var password = document.querySelector('#password');
 
+	const spanAddress = document.querySelector('#spanAddress');
+
 	var favoritesDiv = document.querySelector('.favorites');
 
 	async function getFavorites() {
@@ -140,6 +142,7 @@
 			mainDivs[4].classList.add('visually-hidden');
 			toggleClass(header, 'homepageHeader');
 			toggleClass(main, 'homepageMain');
+			spanAddress.innerHTML = localStorage.address;
 			// 				} else if (res[0].err === 'Invalid username or password.') {
 			// 					console.log(res[0].err);
 			// 				} else if (res[0].err.message) {
@@ -270,7 +273,6 @@
 				(e) => (btnDropdown.children[0].innerHTML = e.target.innerHTML)
 			)
 		);
-		const spanAddress = document.querySelector('#spanAddress');
 		const spanTotal = document.querySelector('#spanTotal');
 		let username = localStorage.username;
 		fetch(`https://mechell-delilah.herokuapp.com/users/${username}`, {
@@ -281,7 +283,7 @@
 			.then((res) => res.json())
 			.then((data) => {
 				localStorage.setItem('id', data[0].id);
-				spanAddress.innerHTML = localStorage.getItem('address');
+				spanAddress.innerHTML = localStorage.address);
 			});
 		const dishesDiv = Array.from(document.querySelector('.dishes').children);
 		let child = '';
