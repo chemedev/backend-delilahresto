@@ -1,6 +1,6 @@
 'use strict';
 
-(async () => {
+window.onload(async function () {
 	let dishesCount = 0;
 	let order = [];
 	let headers = {
@@ -409,4 +409,4 @@
 			localStorage.ordered = 'false';
 		});
 	});
-})();
+});
