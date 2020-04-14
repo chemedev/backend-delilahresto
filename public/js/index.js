@@ -11,7 +11,7 @@
 	//! Load Dishes
 	async function loadDishes() {
 		const dishesDiv = document.querySelector('.dishes');
-		let dishes = await fetch('http://localhost:3000/products', {
+		let dishes = await fetch('https://mechell-delilah.herokuapp.com/products', {
 			headers: {
 				// Authorization: `bearer ${localStorage.getItem('token')}`,	//! HARDCODED HARDCODED HARDCODED
 				Authorization: `bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTA1MSwidXNlcm5hbWUiOiJtZWNoZWxsIiwiaXNfYWRtaW4iOjEsImlhdCI6MTU4NjgyMzY1OH0.S64uTDh_H0_fUjhoJ9EranSE3VN-RQIHrmLam9o-SKU`,
@@ -67,7 +67,7 @@
 	async function getFavorites() {
 		let username = localStorage.getItem('username');
 		let favs = await fetch(
-			`http://localhost:3000/users/${username}/favorites`,
+			`https://mechell-delilah.herokuapp.com/users/${username}/favorites`,
 			{
 				headers: {
 					Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -115,7 +115,7 @@
 			toggleClass(header, 'homepageHeader');
 			toggleClass(main, 'homepageMain');
 		} else {
-			// 	fetch('http://localhost:3000/signin', {
+			// 	fetch('https://mechell-delilah.herokuapp.com/signin', {
 			// 		method: 'POST',
 			// 		body: JSON.stringify({ token: localStorage.getItem('token') }),
 			// 		headers,
@@ -162,7 +162,7 @@
 
 		if (loginEmail.validity.valid && loginPassword.validity.valid) {
 			let auth = '';
-			fetch('http://localhost:3000/signin', {
+			fetch('https://mechell-delilah.herokuapp.com/signin', {
 				method: 'POST',
 				body: JSON.stringify(data),
 				headers: headers,
@@ -220,7 +220,7 @@
 			address.validity.valid &&
 			password.validity.valid
 		) {
-			fetch('http://localhost:3000/users', {
+			fetch('https://mechell-delilah.herokuapp.com/users', {
 				method: 'POST',
 				body: JSON.stringify(data),
 				headers: headers,
@@ -264,7 +264,7 @@
 		);
 		const spanAddress = document.querySelector('#spanAddress');
 		const spanTotal = document.querySelector('#spanTotal');
-		fetch('http://localhost:3000/users/mechell', {
+		fetch('https://mechell-delilah.herokuapp.com/users/mechell', {
 			//! HARDCODED
 			headers: {
 				Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -334,7 +334,7 @@
 			items: orderItems,
 		};
 
-		fetch('http://localhost:3000/orders', {
+		fetch('https://mechell-delilah.herokuapp.com/orders', {
 			method: 'POST',
 			body: JSON.stringify(order),
 			headers: headers,
