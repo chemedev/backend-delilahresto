@@ -10,27 +10,35 @@
 
 	//! Load Dishes
 	async function loadDishes() {
-		const dishesDiv = document.querySelector('.dishes');
-		let dishes = await fetch('https://mechell-delilah.herokuapp.com/products', {
-			headers: {
-				// Authorization: `bearer ${localStorage.getItem('token')}`,	//! HARDCODED HARDCODED HARDCODED
-				Authorization: `bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTA1MSwidXNlcm5hbWUiOiJtZWNoZWxsIiwiaXNfYWRtaW4iOjEsImlhdCI6MTU4NjgyMzY1OH0.S64uTDh_H0_fUjhoJ9EranSE3VN-RQIHrmLam9o-SKU`,
-			},
-		}).then((res) => res.json());
-		let child = '';
-		dishes.forEach((dish) => {
-			child += `
-		<div class="dishes__dish" data-id="${dish.id}" data-name="${dish.description}">
-			<img class="dishes__dish__img" src="${dish.picture}" alt="" />
-			<div>
-				<p class="dishes__dish__name">${dish.description}</p>
-				<p class="dishes__dish__price">$${dish.price}</p>
-			</div>
-			<i class="material-icons material-icons--add">add_circle</i>
-		</div>
+		try {
+			const dishesDiv = document.querySelector('.dishes');
+			if (localStorage.getItem('token')) {
+				let dishes = await fetch(
+					'https://mechell-delilah.herokuapp.com/products',
+					{
+						headers: {
+							Authorization: `bearer ${localStorage.getItem('token')}`, //! HARDCODED HARDCODED HARDCODED
+						},
+					}
+				).then((res) => res.json());
+				let child = '';
+				dishes.forEach((dish) => {
+					child += `
+						<div class="dishes__dish" data-id="${dish.id}" data-name="${dish.description}">
+							<img class="dishes__dish__img" src="${dish.picture}" alt="" />
+							<div>
+								<p class="dishes__dish__name">${dish.description}</p>
+								<p class="dishes__dish__price">$${dish.price}</p>
+							</div>
+							<i class="material-icons material-icons--add">add_circle</i>
+						</div>
 	`;
-		});
-		dishesDiv.innerHTML = child;
+				});
+				dishesDiv.innerHTML = child;
+			}
+		} catch (e) {
+			return console.log(e);
+		}
 	}
 
 	await loadDishes();
