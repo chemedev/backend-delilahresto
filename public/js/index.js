@@ -32,7 +32,7 @@ async function loadDishes() {
 	dishesDiv.innerHTML = child;
 }
 
-await loadDishes();
+loadDishes();
 
 //! DOM manipulation
 var header = document.querySelector('header');
