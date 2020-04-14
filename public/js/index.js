@@ -70,8 +70,7 @@
 	var address = document.querySelector('#address');
 	var password = document.querySelector('#password');
 
-	const spanAddress = document.querySelector('#spanAddress');
-
+	var spanAddress = document.querySelector('#spanAddress');
 	var favoritesDiv = document.querySelector('.favorites');
 
 	async function getFavorites() {
@@ -124,6 +123,7 @@
 			mainDivs[4].classList.remove('visually-hidden');
 			toggleClass(header, 'homepageHeader');
 			toggleClass(main, 'homepageMain');
+			spanAddress.innerHTML = localStorage.address;
 		} else {
 			// 	fetch('https://mechell-delilah.herokuapp.com/signin', {
 			// 		method: 'POST',
@@ -142,7 +142,6 @@
 			mainDivs[4].classList.add('visually-hidden');
 			toggleClass(header, 'homepageHeader');
 			toggleClass(main, 'homepageMain');
-			spanAddress.innerHTML = localStorage.address;
 			// 				} else if (res[0].err === 'Invalid username or password.') {
 			// 					console.log(res[0].err);
 			// 				} else if (res[0].err.message) {
