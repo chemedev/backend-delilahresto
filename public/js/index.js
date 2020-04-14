@@ -283,7 +283,7 @@
 			.then((res) => res.json())
 			.then((data) => {
 				localStorage.setItem('id', data[0].id);
-				spanAddress.innerHTML = localStorage.address);
+				spanAddress.innerHTML = localStorage.address;
 			});
 		const dishesDiv = Array.from(document.querySelector('.dishes').children);
 		let child = '';
