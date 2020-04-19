@@ -1,5 +1,5 @@
-const { sequelize } = require('../../database/database');
-const { privateKey } = require('../../src/private.key');
+const { sequelize } = require('../database/database');
+const { privateKey } = require('../private.key');
 const jwt = require('jsonwebtoken');
 
 function isAdmin(req, res, next) {
@@ -35,37 +35,3 @@ function isAccesingOwnData(req, res, next) {
 }
 
 module.exports = { isAdmin, isLogged, isAccesingOwnData };
-
-// function authUser(req, res, next) {
-// 	const header = req.headers.authorization;
-
-// 	if (header) {
-// 		const token = header.split(' ')[1];
-// 		jwt.verify(token, secret, (err, data) => {
-// 			if (data) {
-// 				req.user = data;
-// 				next();
-// 			} else {
-// 				res.status(401).json({ err: 'Invalid token.' });
-// 			}
-// 		});
-// 	} else {
-// 		res.status(401).json({ err: 'Null token.' });
-// 	}
-// }
-
-// async function isLoggedIn(req, res, next) {
-// 	try {
-// 		console.log(req.headers);
-// 		if (req.headers.authorization !== '') {
-// 			const token = req.headers.authorization;
-// 			let username = jwt.verify(token, privateKey);
-// 			let query = `SELECT * FROM users WHERE username = "${username}"`;
-// 			let answer = await sequelize.query(query);
-// 			if (!answer[0]) return next();
-// 			return res.json([{ err: 'You are already logged.' }]);
-// 		} else return res.json({ err: 'Not logged in.' });
-// 	} catch (err) {
-// 		res.status(401).json({ err });
-// 	}
-// }

@@ -1,15 +1,10 @@
 const { db } = require('./keys');
 const Sequelize = require('sequelize');
+const connection = `mysql://${db.user}:${db.password}@${db.host}:3306/${db.database}`;
 
-// const sequelize = new Sequelize(
-// 	`mysql://${db.user}:${db.password}@${db.host}:3306/${db.database}`,
-// 	{ logging: false }
-// );
-
-const sequelize = new Sequelize(
-	`mysql://RdcociQlyU:u2kCJJpGzL@remotemysql.com:3306/RdcociQlyU`,
-	{ logging: false }
-);
+const sequelize = new Sequelize(`${process.env.SQL_URI || connection}`, {
+	logging: false,
+});
 
 function sql(query, ...params) {
 	return sequelize
@@ -17,7 +12,7 @@ function sql(query, ...params) {
 			replacements: [...params],
 			type: sequelize.QueryTypes.SELECT,
 		})
-		.catch((e) => console.log({e, Query: e.sql, Message: e.message }));
+		.catch((e) => console.log({ e, Query: e.sql, Message: e.message }));
 }
 
 sequelize
@@ -36,4 +31,4 @@ sequelize
 	}
 })();
 
-module.exports = { sequelize, sql};
+module.exports = { sequelize, sql };

@@ -1,8 +1,8 @@
 const express = require('express');
-const { sql, sequelize } = require('../../database/database');
+const { sql, sequelize } = require('../database/database');
 const jwt = require('jsonwebtoken');
 const Router = express.Router();
-const { privateKey } = require('../../src/private.key');
+const { privateKey } = require('../private.key');
 const { isAdmin, isLogged, isAccesingOwnData } = require('../lib/helpers');
 
 //TODO: Revisar err 404 si hace falta o no.

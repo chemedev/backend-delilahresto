@@ -2,10 +2,10 @@
   "name": "delilah-resto",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "backend/index.js",
   "scripts": {
-		"dev": "nodemon",
-		"start": "node src/index.js"
+    "dev": "cross-env NODE_ENV=development nodemon backend/index.js",
+    "start": "cross-env NODE_ENV=production node backend/index.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,8 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.2",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.1.0",

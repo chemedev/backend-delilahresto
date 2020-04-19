@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Delilah Restó</title>
+		<link
+			href="https://fonts.googleapis.com/css?family=Fredoka+One|Noto+Sans+KR&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/icon?family=Material+Icons"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="/css/main.min.css" />
+		<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+	</head>
+	<body>
+		<header class="homepageHeader">
+			<!-- <header> -->
+			<h1>Delilah Restó</h1>
+		</header>
+		<main class="homepageMain">
+			<!-- <main> -->
+			<div class="mainDivs">
+				<form action="" class="formlogin">
+					<label class="formlogin__label" for="email">
+						Usuario o correo electrónico</label
+					>
+					<input
+						class="formlogin__input"
+						type="text"
+						name=""
+						id="loginEmail"
+						autofocus
+					/>
+					<label class="formlogin__label" for="password">Contraseña</label>
+					<input
+						class="formlogin__input formlogin__input--pw"
+						type="password"
+						name=""
+						id="loginPassword"
+						required
+					/>
+				</form>
+				<div class="wrapper">
+					<input
+						id="loginLogin"
+						class="btn wrapper__input"
+						type="button"
+						value="Iniciar Sesión"
+					/>
+					<input
+						id="loginSignup"
+						class="btn wrapper__input wrapper__input--signup"
+						type="button"
+						value="Registrarse"
+					/>
+				</div>
+			</div>
+			<div class="mainDivs mainDivs--arounded visually-hidden">
+				<form action="" class="formlogin">
+					<label class="formlogin__label" for="username">Usuario</label>
+					<input
+						class="formlogin__input"
+						type="text"
+						name=""
+						id="username"
+						required
+					/>
+					<label class="formlogin__label" for="fullname"
+						>Nombre y Apellido</label
+					>
+					<input
+						class="formlogin__input"
+						type="text"
+						name=""
+						id="fullname"
+						required
+					/>
+					<label class="formlogin__label" for="email">Correo electrónico</label>
+					<input class="formlogin__input" type="email" name="" id="email" />
+					<label class="formlogin__label" for="mobile">Teléfono</label>
+					<input
+						class="formlogin__input"
+						type="tel"
+						name=""
+						id="mobile"
+						required
+					/>
+					<label class="formlogin__label" for="address"
+						>Dirección de envío</label
+					>
+					<input
+						class="formlogin__input"
+						type="text"
+						name=""
+						id="address"
+						required
+					/>
+					<label class="formlogin__label" for="password">Contraseña</label>
+					<input
+						class="formlogin__input formlogin__input--pw"
+						type="password"
+						name=""
+						id="password"
+						required
+					/>
+				</form>
+				<div class="wrapper">
+					<input
+						id="signupCreate"
+						class="btn wrapper__input"
+						type="button"
+						value="Crear Cuenta"
+					/>
+					<input
+						id="signupCancel"
+						class="btn wrapper__input wrapper__input--signup"
+						type="button"
+						value="Cancelar"
+					/>
+				</div>
+			</div>
+			<div class="mainDivs mainDivs--unjustified visually-hidden">
+				<h5 id="h5Favs" class="--padded">Tus favoritos</h5>
+				<div class="favorites">
+				</div>
+				<h5 class="--padded">Nuestros platos</h5>
+				<div class="dishes">
+				</div>
+				<div class="wrapper wrapper--fixed visually-hidden">
+					<input
+						id="orderAdd"
+						class="btn wrapper__input"
+						type="button"
+						value="Agregar a mi pedido"
+					/>
+				</div>
+			</div>
+			<div class="mainDivs mainDivs--unjustified visually-hidden">
+				<h5 class="statusTitle --padded visually-hidden">Estado</h5>
+				<div class="status visually-hidden">
+					<div class="status__item status__item--active">
+						<div class="circle"></div>
+						<span class="status__item__span">Confirmado</span>
+					</div>
+					<div class="status__item">
+						<div class="circle circle--withBar"></div>
+						<span class="status__item__span">En preparación</span>
+					</div>
+					<div class="status__item">
+						<div class="circle circle--withBar"></div>
+						<span class="status__item__span">En camino</span>
+					</div>
+					<div class="status__item">
+						<div class="circle circle--withBar"></div>
+						<span class="status__item__span">Entregado</span>
+					</div>
+				</div>
+				<h5 class="--padded">Detalle</h5>
+				<div class="dishes" id="orderDishes">
+				</div>
+				<div class="details">
+					<span id="spanTotal" class="details__item">Total: $775</span>
+					<div class="details__item">
+						<h5>Forma de pago</h5>
+						<div class="dropdown">
+							<button class="dropdown__btn">
+								<span>Efectivo</span>
+								<i class="material-icons material-icons--small"
+									>arrow_drop_down</i
+								>
+							</button>
+							<div class="dropdown__content">
+								<span>Efectivo</span>
+								<span>Débito</span>
+								<span>Crébito</span>
+								<span>PayPal</span>
+								<span>MercadoPago</span>
+							</div>
+						</div>
+					</div>
+					<div class="details__item">
+						<h5>Dirección</h5>
+						<span id="spanAddress">Problem fetching address</span>
+					</div>
+				</div>
+				<div class="wrapper">
+					<input
+						id="detailConfirm"
+						class="btn wrapper__input"
+						type="button"
+						value="Confirmar Pedido"
+					/>
+				</div>
+			</div>
+
+			<div class="mainDivs successfulOrder visually-hidden">
+				<img
+					class="successfulOrder__img"
+					src="/img/mobile_user.svg"
+					alt="user waiting"
+				/>
+				<div class="successfulOrder__wrapper">
+					<h2>¡Recibimos tu pedido!</h2>
+					<p class="successfulOrder__p">
+						<span>Hola</span>, gracias por pedir a Delilah. Puedes seguir tu
+						pedido para saber dónde está.
+					</p>
+				</div>
+				<div class="wrapper">
+					<input
+						id="successfulFollow"
+						class="btn wrapper__input"
+						type="button"
+						value="Seguir Pedido"
+					/>
+				</div>
+			</div>
+		</main>
+
+		<script src="/js/index.js"></script>
+	</body>
+</html>

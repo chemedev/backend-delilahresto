@@ -1,5 +1,5 @@
 const express = require('express');
-const { sql, sequelize } = require('../../database/database');
+const { sql, sequelize } = require('../database/database');
 const Router = express.Router();
 const { isAdmin, isLogged, isAccesingOwnData } = require('../lib/helpers');
 
@@ -9,7 +9,8 @@ Router.post('/orders', isLogged, async (req, res) => {
 	try {
 		let answer;
 		let inserts = [];
-		let order = req.body;
+    let order = req.body;
+    sequelize.query(`DELETE FROM favorites WHERE user_id = ${order.user_id}`);
 		inserts.push(
 			sequelize
 				.query(
@@ -25,15 +26,16 @@ Router.post('/orders', isLogged, async (req, res) => {
 							`INSERT INTO favorites (user_id, product_id) VALUES (${order.user_id}, ${item.product_id})`
 						);
 					});
+					return null;
 				})
 		);
-
 		Promise.all(inserts).then(async () => {
 			answer = await sql(`SELECT * FROM orders WHERE id = ?`, answer);
 			res.status(201).json(answer);
-		});
+    });
+
 	} catch (e) {
-		console.log(e.message);
+		console.log('EL ERROR ES:', e, e.message);
 		res.sendStatus(500);
 	}
 });

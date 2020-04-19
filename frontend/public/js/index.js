@@ -1,6 +1,9 @@
 'use strict';
 
 (async () => {
+	var FETCH_URI = 'http://localhost:3000';
+	// var FETCH_URI = 'https://mechell-delilah.herokuapp.com';
+
 	let dishesCount = 0;
 	let order = [];
 	let headers = {
@@ -13,14 +16,13 @@
 		try {
 			const dishesDiv = document.querySelector('.dishes');
 			if (localStorage.getItem('token')) {
-				let dishes = await fetch(
-					'https://mechell-delilah.herokuapp.com/products',
-					{
-						headers: {
-							Authorization: `bearer ${localStorage.getItem('token')}`,
-						},
-					}
-				).then((res) => res.json());
+				let dishes = await fetch(`${FETCH_URI}/products`, {
+					headers: {
+						Authorization: `bearer ${localStorage.getItem(
+							'token'
+						)}`,
+					},
+				}).then((res) => res.json());
 				let child = '';
 				dishes.forEach((dish) => {
 					child += `
@@ -75,14 +77,11 @@
 
 	async function getFavorites() {
 		let username = localStorage.getItem('username');
-		let favs = await fetch(
-			`https://mechell-delilah.herokuapp.com/users/${username}/favorites`,
-			{
-				headers: {
-					Authorization: `Bearer ${localStorage.getItem('token')}`,
-				},
-			}
-		).then((res) => res.json());
+		let favs = await fetch(`${FETCH_URI}/users/${username}/favorites`, {
+			headers: {
+				Authorization: `Bearer ${localStorage.getItem('token')}`,
+			},
+		}).then((res) => res.json());
 
 		let child = '';
 
@@ -125,7 +124,7 @@
 			toggleClass(main, 'homepageMain');
 			spanAddress.innerHTML = localStorage.address;
 		} else {
-			// 	fetch('https://mechell-delilah.herokuapp.com/signin', {
+			// 	fetch(`${FETCH_URI}/signin`, {
 			// 		method: 'POST',
 			// 		body: JSON.stringify({ token: localStorage.getItem('token') }),
 			// 		headers,
@@ -172,7 +171,7 @@
 
 		if (loginEmail.validity.valid && loginPassword.validity.valid) {
 			let auth = '';
-			fetch('https://mechell-delilah.herokuapp.com/signin', {
+			fetch(`${FETCH_URI}/signin`, {
 				method: 'POST',
 				body: JSON.stringify(data),
 				headers: headers,
@@ -230,7 +229,7 @@
 			address.validity.valid &&
 			password.validity.valid
 		) {
-			fetch('https://mechell-delilah.herokuapp.com/users', {
+			fetch(`${FETCH_URI}/users`, {
 				method: 'POST',
 				body: JSON.stringify(data),
 				headers: headers,
@@ -274,7 +273,7 @@
 		);
 		const spanTotal = document.querySelector('#spanTotal');
 		let username = localStorage.username;
-		fetch(`https://mechell-delilah.herokuapp.com/users/${username}`, {
+		fetch(`${FETCH_URI}/users/${username}`, {
 			headers: {
 				Authorization: `Bearer ${localStorage.getItem('token')}`,
 			},
@@ -284,7 +283,9 @@
 				localStorage.setItem('id', data[0].id);
 				spanAddress.innerHTML = localStorage.address;
 			});
-		const dishesDiv = Array.from(document.querySelector('.dishes').children);
+		const dishesDiv = Array.from(
+			document.querySelector('.dishes').children
+		);
 		let child = '';
 		let total = 0;
 		dishesDiv.forEach((e) => {
@@ -343,7 +344,7 @@
 			items: orderItems,
 		};
 
-		fetch('https://mechell-delilah.herokuapp.com/orders', {
+		fetch(`${FETCH_URI}/orders`, {
 			method: 'POST',
 			body: JSON.stringify(order),
 			headers: headers,
@@ -413,7 +414,9 @@
 
 	statusCircles.forEach((circle, index) => {
 		circle.addEventListener('click', () => {
-			statusItems.forEach((e) => e.classList.remove('status__item--active'));
+			statusItems.forEach((e) =>
+				e.classList.remove('status__item--active')
+			);
 			toggleClass(statusItems[index], 'status__item--active');
 			localStorage.ordered = 'false';
 		});

@@ -1,5 +1,5 @@
 const express = require('express');
-const { sequelize } = require('../../database/database');
+const { sequelize } = require('../database/database');
 const Router = express.Router();
 const { isAdmin, isLogged } = require('../lib/helpers');
 
