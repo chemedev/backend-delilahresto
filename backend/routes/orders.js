@@ -9,8 +9,10 @@ Router.post('/orders', isLogged, async (req, res) => {
 	try {
 		let answer;
 		let inserts = [];
-    let order = req.body;
-    sequelize.query(`DELETE FROM favorites WHERE user_id = ${order.user_id}`);
+		let order = req.body;
+		sequelize.query(
+			`DELETE FROM favorites WHERE user_id = ${order.user_id}`
+		);
 		inserts.push(
 			sequelize
 				.query(
@@ -32,8 +34,7 @@ Router.post('/orders', isLogged, async (req, res) => {
 		Promise.all(inserts).then(async () => {
 			answer = await sql(`SELECT * FROM orders WHERE id = ?`, answer);
 			res.status(201).json(answer);
-    });
-
+		});
 	} catch (e) {
 		console.log('EL ERROR ES:', e, e.message);
 		res.sendStatus(500);
@@ -41,11 +42,69 @@ Router.post('/orders', isLogged, async (req, res) => {
 });
 
 Router.get('/orders', isAdmin, async (_req, res) => {
+	// try {
+	// 	const query = 'SELECT * FROM orders WHERE is_deleted = 0';
+	// 	const answer = await sequelize.query(query);
+	// 	res.status(200).send(answer[0]);
+	// } catch {
+	// 	res.sendStatus(500);
+	// }
 	try {
-		const query = 'SELECT * FROM orders WHERE is_deleted = 0';
-		const answer = await sequelize.query(query);
-		res.status(200).send(answer[0]);
-	} catch {
+		const answer = await sql(
+			`SELECT orders.id, products.description, orders.created_at, order_details.quantity, users.fullname, users.address, status.status, payment.method
+										FROM users
+										JOIN orders ON orders.user_id = users.id
+										JOIN order_details ON orders.id = order_details.order_id
+										JOIN products ON order_details.product_id = products.id
+										JOIN status ON orders.status_id = status.id
+										JOIN payment ON orders.payment_id = payment.id
+										WHERE orders.is_deleted = 0;`
+		);
+		if (!answer[0]) return res.sendStatus(404);
+		let id = answer[0].id;
+		let orders = [],
+			items = [],
+			buffer = {};
+		answer.forEach((order) => {
+			if (id == order.id) {
+				items.push({
+					description: order.description,
+					quantity: order.quantity,
+				});
+				buffer = {
+					id: order.id,
+					time: order.created_at,
+          user: order.fullname,
+          address: order.address,
+					status: order.status,
+					payment: order.method,
+				};
+			}
+			if (id != order.id) {
+				buffer.items = items;
+				orders.push(buffer);
+				items = [];
+				buffer = {
+					id: order.id,
+					time: order.created_at,
+					user: order.fullname,
+					address: order.address,
+					status: order.status,
+					payment: order.method,
+				};
+				items.push({
+					description: order.description,
+					quantity: order.quantity,
+				});
+				id = order.id;
+			}
+		});
+		buffer.items = items;
+		orders.push(buffer);
+
+		res.send(orders);
+	} catch (e) {
+		console.log(e.message);
 		res.sendStatus(500);
 	}
 });
