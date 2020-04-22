@@ -1,0 +1,51 @@
+.btnStatus {
+  display: inline-block;
+  background-color: crimson;
+  padding-left: 1rem;
+  /* padding-top: 0.3rem; */
+  color: #fff;
+  font-size: 14px;
+  line-height: 24px;
+  text-align: left;
+  width: 120px;
+  height: 24px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.btnStatus:hover {
+  background-color: brown;
+}
+
+.spanColumnTitle {
+  color: grey;
+  font-weight: 700;
+  font-size: 14px;
+
+}
+
+.popup {
+  position: fixed;
+  height: 100vh;
+  width: 0vw;
+  right: 0;
+  top: 0;
+  background-color: white;
+  transition: 0.5s;
+  z-index: 10;
+}
+
+.popup.active {
+  width: 40vw;
+}
+
+.popup.active + .overlay {
+  height: 100vh;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+  filter: blur(2px);
+}
+
+/*# sourceMappingURL=/admin.ef2f6a2f.css.map */
