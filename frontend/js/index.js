@@ -1,6 +1,6 @@
 'use strict';
 
-(async () => {
+document.addEventListener('DOMContentLoaded', async () => {
 	var FETCH_URI = 'http://localhost:3000';
 	// var FETCH_URI = 'https://mechell-delilah.herokuapp.com';
 
@@ -43,7 +43,11 @@
 		}
 	}
 
-	await loadDishes();
+	try {
+		await loadDishes();
+	} catch(e) {
+    console.log("ERROR:", e);
+  }
 
 	//! DOM manipulation
 	var header = document.querySelector('header');
@@ -421,4 +425,4 @@
 			localStorage.ordered = 'false';
 		});
 	});
-})();
+});

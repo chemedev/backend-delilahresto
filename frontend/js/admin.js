@@ -17,7 +17,7 @@ async function getOrders() {
 	await fetch('http://localhost:3000/orders', {
 		headers: {
 			authorization:
-				'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTA1MSwidXNlcm5hbWUiOiJtZWNoZWxsIiwiaXNfYWRtaW4iOjEsImlhdCI6MTU4NjQ1Mjk5OH0.--kOxHhBqhb1ayszt_MC3phly3nJTztZQ-9EnDAdadY',
+				'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAwMCwidXNlcm5hbWUiOiJhZG1pbiIsImlzX2FkbWluIjoxLCJpYXQiOjE1ODczNDU3MjJ9.YHk8MICr8Mv73sUyu1YLUkmKt4cXk-lWKmAgg85hnSE',
 		},
 	})
 		.then((res) => res.json())

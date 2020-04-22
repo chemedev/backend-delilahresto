@@ -39,7 +39,6 @@ app.use(require('./routes/products'));
 app.use(require('./routes/orders'));
 
 //* STATIC FILES
-
 app.use(express.static(__dirname + '/public'));
 
 app.get('/admin', (_, res) => {

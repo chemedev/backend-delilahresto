@@ -83,3 +83,6 @@ VALUES
 ('Focaccia BLT','/img/focacciaVLT.jpg',280.00,0),
 ('Sandwich de queso','/img/cheeseSandwich.jpg',268.00,0),
 ('Hamburguesa especial','/img/specialBurger.jpg',410.00,0);
+
+INSERT INTO users (username, password, fullname, email, mobile, address, is_admin)
+VALUES ('admin', 'admin', 'Root Admin', 'admin@delilah.com', '3419999999', 'Rosario', 1);

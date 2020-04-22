@@ -12,8 +12,9 @@
 			href="https://fonts.googleapis.com/icon?family=Material+Icons"
 			rel="stylesheet"
 		/>
-		<link rel="stylesheet" href="/css/main.min.css" />
+		<link rel="stylesheet" href="css/main.sass" />
 		<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+		<script src="js/index.js" defer></script>
 	</head>
 	<body>
 		<header class="homepageHeader">
@@ -34,7 +35,9 @@
 						id="loginEmail"
 						autofocus
 					/>
-					<label class="formlogin__label" for="password">Contraseña</label>
+					<label class="formlogin__label" for="password"
+						>Contraseña</label
+					>
 					<input
 						class="formlogin__input formlogin__input--pw"
 						type="password"
@@ -60,7 +63,9 @@
 			</div>
 			<div class="mainDivs mainDivs--arounded visually-hidden">
 				<form action="" class="formlogin">
-					<label class="formlogin__label" for="username">Usuario</label>
+					<label class="formlogin__label" for="username"
+						>Usuario</label
+					>
 					<input
 						class="formlogin__input"
 						type="text"
@@ -78,9 +83,18 @@
 						id="fullname"
 						required
 					/>
-					<label class="formlogin__label" for="email">Correo electrónico</label>
-					<input class="formlogin__input" type="email" name="" id="email" />
-					<label class="formlogin__label" for="mobile">Teléfono</label>
+					<label class="formlogin__label" for="email"
+						>Correo electrónico</label
+					>
+					<input
+						class="formlogin__input"
+						type="email"
+						name=""
+						id="email"
+					/>
+					<label class="formlogin__label" for="mobile"
+						>Teléfono</label
+					>
 					<input
 						class="formlogin__input"
 						type="tel"
@@ -98,7 +112,9 @@
 						id="address"
 						required
 					/>
-					<label class="formlogin__label" for="password">Contraseña</label>
+					<label class="formlogin__label" for="password"
+						>Contraseña</label
+					>
 					<input
 						class="formlogin__input formlogin__input--pw"
 						type="password"
@@ -124,11 +140,9 @@
 			</div>
 			<div class="mainDivs mainDivs--unjustified visually-hidden">
 				<h5 id="h5Favs" class="--padded">Tus favoritos</h5>
-				<div class="favorites">
-				</div>
+				<div class="favorites"></div>
 				<h5 class="--padded">Nuestros platos</h5>
-				<div class="dishes">
-				</div>
+				<div class="dishes"></div>
 				<div class="wrapper wrapper--fixed visually-hidden">
 					<input
 						id="orderAdd"
@@ -159,10 +173,11 @@
 					</div>
 				</div>
 				<h5 class="--padded">Detalle</h5>
-				<div class="dishes" id="orderDishes">
-				</div>
+				<div class="dishes" id="orderDishes"></div>
 				<div class="details">
-					<span id="spanTotal" class="details__item">Total: $775</span>
+					<span id="spanTotal" class="details__item"
+						>Total: $775</span
+					>
 					<div class="details__item">
 						<h5>Forma de pago</h5>
 						<div class="dropdown">
@@ -205,8 +220,8 @@
 				<div class="successfulOrder__wrapper">
 					<h2>¡Recibimos tu pedido!</h2>
 					<p class="successfulOrder__p">
-						<span>Hola</span>, gracias por pedir a Delilah. Puedes seguir tu
-						pedido para saber dónde está.
+						<span>Hola</span>, gracias por pedir a Delilah. Puedes
+						seguir tu pedido para saber dónde está.
 					</p>
 				</div>
 				<div class="wrapper">
@@ -219,7 +234,5 @@
 				</div>
 			</div>
 		</main>
-
-		<script src="/js/index.js"></script>
 	</body>
 </html>

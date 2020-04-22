@@ -13,7 +13,14 @@ Router.post('/users', async (req, res) => {
 	let query, user, payload;
 	try {
 		let { username, fullname, email, mobile, address, password } = req.body;
-		if (!username || !fullname || !email || !mobile || !address || !password)
+		if (
+			!username ||
+			!fullname ||
+			!email ||
+			!mobile ||
+			!address ||
+			!password
+		)
 			return res.sendStatus(400);
 		query = `SELECT username, email, mobile FROM users WHERE is_deleted = 0 && (email = "${email}" || mobile = "${mobile}" || username = "${username}")`;
 		let answer = await sequelize.query(query);
@@ -31,10 +38,11 @@ Router.post('/users', async (req, res) => {
 			username: username,
 			is_admin: user.is_admin,
 		};
-		const token = jwt.sign(payload, privateKey);
-		res.set('Authorization', `Bearer ${token}`);
+    const token = jwt.sign(payload, privateKey);
+    res.set('Authorization', `Bearer ${token}`);
 		res.status(201).json(answer[0]);
-	} catch {
+	} catch (e) {
+		console.log(e);
 		res.sendStatus(500);
 	}
 });
@@ -80,8 +88,22 @@ Router.put(
 			let paramUsername = req.params.username;
 			let regex = new RegExp('^[\\w]+$');
 			if (!regex.test(paramUsername)) return res.sendStatus(400);
-			let { username, fullname, email, mobile, address, password } = req.body;
-			if (!username || !fullname || !email || !mobile || !address || !password)
+			let {
+				username,
+				fullname,
+				email,
+				mobile,
+				address,
+				password,
+			} = req.body;
+			if (
+				!username ||
+				!fullname ||
+				!email ||
+				!mobile ||
+				!address ||
+				!password
+			)
 				return res.sendStatus(400);
 			let query = `SELECT * FROM users WHERE username = "${paramUsername}" AND is_deleted = 0`;
 			let answer = await sequelize.query(query);
@@ -112,12 +134,17 @@ Router.get(
 			// let answer = await sequelize.query(query);
 			let response;
 			await sequelize
-				.query('SELECT id FROM users WHERE username = ? AND is_deleted = 0', {
-					replacements: [paramUsername],
-					type: sequelize.QueryTypes.SELECT,
-				})
+				.query(
+					'SELECT id FROM users WHERE username = ? AND is_deleted = 0',
+					{
+						replacements: [paramUsername],
+						type: sequelize.QueryTypes.SELECT,
+					}
+				)
 				.then((data) => (response = data[0]))
-				.catch((e) => console.log({ e, Query: e.sql, Message: e.message }));
+				.catch((e) =>
+					console.log({ e, Query: e.sql, Message: e.message })
+				);
 
 			await sequelize
 				.query('SELECT product_id FROM favorites WHERE user_id = ?', {
@@ -125,24 +152,29 @@ Router.get(
 					type: sequelize.QueryTypes.SELECT,
 				})
 				.then((data) => (response = data))
-				.catch((e) => console.log({ e, Query: e.sql, Message: e.message }));
+				.catch((e) =>
+					console.log({ e, Query: e.sql, Message: e.message })
+				);
 
 			let send = [];
 
 			response.forEach((prod) => {
 				send.push(
-					sequelize.query(
-						'SELECT description, picture, price FROM products WHERE id = ?',
-						{
-							replacements: [prod.product_id],
-							type: sequelize.QueryTypes.SELECT,
-						}
-					).then(res => res[0])
+					sequelize
+						.query(
+							'SELECT description, picture, price FROM products WHERE id = ?',
+							{
+								replacements: [prod.product_id],
+								type: sequelize.QueryTypes.SELECT,
+							}
+						)
+						.then((res) => res[0])
 				);
 			});
 
 			Promise.all(send).then((data) => {
-				res.send(data)})
+				res.send(data);
+			});
 		} catch {
 			res.sendStatus(500);
 		}
