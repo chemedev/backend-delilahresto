@@ -6,6 +6,8 @@ const sequelize = new Sequelize(`${process.env.SQL_URI || connection}`, {
 	logging: false,
 });
 
+console.log('SQL:', process.env.SQL_URI);
+
 function sql(query, ...params) {
 	return sequelize
 		.query(query, {
