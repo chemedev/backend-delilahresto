@@ -3641,7 +3641,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var ordersContainer = document.getElementById('orders-container');
 var spanDate = document.getElementById('span-date');
-var popup = document.getElementById('popup');
+var popup = document.getElementById('popup'); // var FETCH_URI = 'http://localhost:3000';
+
+var FETCH_URI = 'https://mechell-delilah.herokuapp.com';
 var now = new Date().toLocaleDateString('es-AR', {
   weekday: 'long',
   month: 'long',
@@ -3661,7 +3663,7 @@ function _getOrders() {
         switch (_context8.prev = _context8.next) {
           case 0:
             _context8.next = 2;
-            return fetch('http://localhost:3000/orders', {
+            return fetch("".concat(FETCH_URI, "/orders"), {
               headers: {
                 authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAwMCwidXNlcm5hbWUiOiJhZG1pbiIsImlzX2FkbWluIjoxLCJpYXQiOjE1ODczNDU3MjJ9.YHk8MICr8Mv73sUyu1YLUkmKt4cXk-lWKmAgg85hnSE'
               }
@@ -3757,7 +3759,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59803" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62444" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

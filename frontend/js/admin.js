@@ -2,6 +2,9 @@ const ordersContainer = document.getElementById('orders-container');
 const spanDate = document.getElementById('span-date');
 const popup = document.getElementById('popup');
 
+// var FETCH_URI = 'http://localhost:3000';
+	var FETCH_URI = 'https://mechell-delilah.herokuapp.com';
+
 let now = new Date()
 	.toLocaleDateString('es-AR', {
 		weekday: 'long',
@@ -14,7 +17,7 @@ spanDate.innerHTML = now.charAt(0).toUpperCase() + now.slice(1);
 let orders = [];
 
 async function getOrders() {
-	await fetch('http://localhost:3000/orders', {
+	await fetch(`${FETCH_URI}/orders`, {
 		headers: {
 			authorization:
 				'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAwMCwidXNlcm5hbWUiOiJhZG1pbiIsImlzX2FkbWluIjoxLCJpYXQiOjE1ODczNDU3MjJ9.YHk8MICr8Mv73sUyu1YLUkmKt4cXk-lWKmAgg85hnSE',
