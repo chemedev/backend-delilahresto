@@ -39,15 +39,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 				dishesDiv.innerHTML = child;
 			}
 		} catch (e) {
-			return console.log(e);
+			console.log(e);
 		}
 	}
 
 	try {
 		await loadDishes();
-	} catch(e) {
-    console.log("ERROR:", e);
-  }
+	} catch (e) {
+		console.log('ERROR:', e);
+	}
 
 	//! DOM manipulation
 	var header = document.querySelector('header');
