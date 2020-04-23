@@ -1,14 +1,14 @@
 'use strict';
 
 document.addEventListener('DOMContentLoaded', async () => {
-	// var FETCH_URI = 'http://localhost:3000';
-	var FETCH_URI = 'https://mechell-delilah.herokuapp.com';
+	var FETCH_URI = 'http://localhost:3000';
+	// var FETCH_URI = 'https://mechell-delilah.herokuapp.com';
 
 	let dishesCount = 0;
 	let order = [];
 	let headers = {
 		'Content-Type': 'application/json',
-		Authorization: `Bearer ${localStorage.getItem('token') || ''}`,
+		Authorization: `Bearer ${localStorage.token || ''}`,
 	};
 
 	//! Load Dishes
@@ -18,11 +18,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 			if (localStorage.getItem('token')) {
 				let dishes = await fetch(`${FETCH_URI}/products`, {
 					headers: {
-						Authorization: `bearer ${localStorage.getItem(
-							'token'
-						)}`,
+						Authorization: `Bearer ${localStorage.token}`,
 					},
-				}).then((res) => res.json());
+				})
+					.then((res) => res.json())
+					.catch((e) => console.log(e));
 				let child = '';
 				dishes.forEach((dish) => {
 					child += `
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 				dishesDiv.innerHTML = child;
 			}
 		} catch (e) {
-			console.log(e);
+			console.log('ERROR:', e);
 		}
 	}
 

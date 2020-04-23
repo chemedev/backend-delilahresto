@@ -2,12 +2,6 @@ const { db } = require('./keys');
 const Sequelize = require('sequelize');
 const connection = `mysql://${db.user}:${db.password}@${db.host}:3306/${db.database}`;
 
-const sequelize = new Sequelize(`${process.env.SQL_URI || connection}`, {
-	logging: false,
-});
-
-console.log(connection);
-
 function sql(query, ...params) {
 	return sequelize
 		.query(query, {
@@ -17,20 +11,13 @@ function sql(query, ...params) {
 		.catch((e) => console.log({ e, Query: e.sql, Message: e.message }));
 }
 
+const sequelize = new Sequelize(`${process.env.SQL_URI || connection}`, {
+	logging: false,
+});
+
 sequelize
 	.authenticate()
 	.then(() => console.log('Conexión establecida.'))
-	.catch((err) => console.log('Error:', err));
-
-(async () => {
-	try {
-		console.log('Users:', await sql('SELECT COUNT(*) FROM users'));
-		console.log('Products', await sql('SELECT COUNT(*) FROM products'));
-		console.log('Orders', await sql('SELECT COUNT(*) FROM orders'));
-		console.log('Details', await sql('SELECT COUNT(*) FROM order_details'));
-	} catch (err) {
-		console.log('Hubo un error:', err.message);
-	}
-})();
+	.catch((err) => console.log('Error:', err.message));
 
 module.exports = { sequelize, sql };

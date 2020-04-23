@@ -42,13 +42,6 @@ Router.post('/orders', isLogged, async (req, res) => {
 });
 
 Router.get('/orders', isAdmin, async (_req, res) => {
-	// try {
-	// 	const query = 'SELECT * FROM orders WHERE is_deleted = 0';
-	// 	const answer = await sequelize.query(query);
-	// 	res.status(200).send(answer[0]);
-	// } catch {
-	// 	res.sendStatus(500);
-	// }
 	try {
 		const answer = await sql(
 			`SELECT orders.id, products.description, orders.created_at, order_details.quantity, users.fullname, users.address, status.status, payment.method
@@ -74,8 +67,8 @@ Router.get('/orders', isAdmin, async (_req, res) => {
 				buffer = {
 					id: order.id,
 					time: order.created_at,
-          user: order.fullname,
-          address: order.address,
+					user: order.fullname,
+					address: order.address,
 					status: order.status,
 					payment: order.method,
 				};
@@ -187,8 +180,6 @@ Router.put('/orders/:id', isAdmin, async (req, res) => {
 		let [answer] = await sequelize.query(query);
 		if (!answer.changedRows)
 			return res.status(409).send([{ err: 'Nothing changed.' }]);
-		// query = `SELECT * FROM orders WHERE id = ${id} AND is_deleted = 0`;
-		// answer = await sequelize.query(query);
 		answer = await sql('SELECT * FROM orders WHERE id = ?', id);
 		res.send(answer);
 	} catch (e) {

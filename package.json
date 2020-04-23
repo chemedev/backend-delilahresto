@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "backend/index.js",
 	"scripts": {
-		"backdev": "cross-env NODE_ENV=development nodemon backend/index.js",
+		"dev": "cross-env NODE_ENV=development nodemon backend/index.js",
 		"start": "cross-env NODE_ENV=production node backend/index.js",
 		"frontdev": "parcel frontend/index.html frontend/admin.html --out-dir backend/public",
 		"build": "parcel build frontend/index.html"

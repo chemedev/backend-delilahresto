@@ -4647,10 +4647,12 @@ document.addEventListener('DOMContentLoaded', /*#__PURE__*/(0, _asyncToGenerator
                       _context8.next = 5;
                       return fetch("".concat(FETCH_URI, "/products"), {
                         headers: {
-                          Authorization: "bearer ".concat(localStorage.getItem('token'))
+                          Authorization: "Bearer ".concat(localStorage.token)
                         }
                       }).then(function (res) {
                         return res.json();
+                      }).catch(function (e) {
+                        return console.log(e);
                       });
 
                     case 5:
@@ -4670,7 +4672,7 @@ document.addEventListener('DOMContentLoaded', /*#__PURE__*/(0, _asyncToGenerator
                     case 11:
                       _context8.prev = 11;
                       _context8.t0 = _context8["catch"](0);
-                      return _context8.abrupt("return", console.log(_context8.t0));
+                      console.log('ERROR:', _context8.t0);
 
                     case 14:
                     case "end":
@@ -4686,13 +4688,13 @@ document.addEventListener('DOMContentLoaded', /*#__PURE__*/(0, _asyncToGenerator
             return _loadDishes.apply(this, arguments);
           };
 
-          // var FETCH_URI = 'http://localhost:3000';
-          FETCH_URI = 'https://mechell-delilah.herokuapp.com';
+          FETCH_URI = 'http://localhost:3000'; // var FETCH_URI = 'https://mechell-delilah.herokuapp.com';
+
           dishesCount = 0;
           order = [];
           headers = {
             'Content-Type': 'application/json',
-            Authorization: "Bearer ".concat(localStorage.getItem('token') || '')
+            Authorization: "Bearer ".concat(localStorage.token || '')
           }; //! Load Dishes
 
           _context13.prev = 9;
@@ -4706,7 +4708,7 @@ document.addEventListener('DOMContentLoaded', /*#__PURE__*/(0, _asyncToGenerator
         case 14:
           _context13.prev = 14;
           _context13.t0 = _context13["catch"](9);
-          console.log("ERROR:", _context13.t0);
+          console.log('ERROR:', _context13.t0);
 
         case 17:
           //! DOM manipulation
@@ -5095,7 +5097,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65209" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50682" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

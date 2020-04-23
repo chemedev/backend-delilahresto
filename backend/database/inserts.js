@@ -24,22 +24,6 @@ for (let i = 0; i < 51; i++) {
 	);
 }
 
-//? INSERT PRODUCTS RND
-// for (let i = 0; i < 11; i++) {
-// 	let product = {
-// 		description: faker.commerce.productName(),
-// 		picture: faker.image.food(256, 256),
-// 		price: faker.commerce.price(100, 500),
-// 	};
-// 	inserts.push(
-// 		sequelize.query(
-// 			`INSERT INTO products (description, picture, price)
-// 			VALUES (:description, :picture, :price)`,
-// 			{ replacements: product }
-// 		)
-// 	);
-// }
-
 //? INSERT ORDERS RND
 // for (let i = 0; i < 16; i++) {
 // 	let order = {

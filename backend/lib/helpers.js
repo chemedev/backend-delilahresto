@@ -17,15 +17,19 @@ function isAdmin(req, res, next) {
 }
 
 function isLogged(req, res, next) {
-    if (!req.headers.authorization) return res.sendStatus(401);
+	try {
+		if (!req.headers.authorization) return res.sendStatus(401);
 		let token = req.headers.authorization.split(' ')[1];
 		jwt.verify(token, privateKey, async (err, data) => {
 			if (err) return res.status(400).send([{ err: err.message }]);
-			let query = `SELECT username FROM users WHERE id = "${data.id}"`;
-			let answer = await sequelize.query(query);
+      let query = `SELECT username FROM users WHERE id = "${data.id}"`;
+      let answer = await sequelize.query(query);
 			if (!answer[0][0]) return res.sendStatus(401);
 			next();
 		});
+	} catch (e) {
+    console.log(e);
+  }
 }
 
 function isAccesingOwnData(req, res, next) {

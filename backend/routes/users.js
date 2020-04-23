@@ -5,8 +5,6 @@ const Router = express.Router();
 const { privateKey } = require('../private.key');
 const { isAdmin, isLogged, isAccesingOwnData } = require('../lib/helpers');
 
-//TODO: Revisar err 404 si hace falta o no.
-
 //! ROUTES /USERS
 
 Router.post('/users', async (req, res) => {
@@ -30,16 +28,17 @@ Router.post('/users', async (req, res) => {
 				.send([{ err: 'Email, username or mobile already used.' }]);
 		query = `INSERT INTO users (username, fullname, email, mobile, address, password) VALUES("${username}", "${fullname}", "${email}", "${mobile}", "${address}", "${password}");`;
 		answer = await sequelize.query(query);
-		query = `SELECT username, fullname, email, mobile, address FROM users WHERE id = "${answer[0]}"`;
+		let userId = answer[0];
+		query = `SELECT username, fullname, email, mobile, address, is_admin FROM users WHERE id = "${answer[0]}"`;
 		answer = await sequelize.query(query);
 		user = answer[0][0];
 		payload = {
-			id: user.id,
+			id: userId,
 			username: username,
 			is_admin: user.is_admin,
 		};
-    const token = jwt.sign(payload, privateKey);
-    res.set('Authorization', `Bearer ${token}`);
+		const token = jwt.sign(payload, privateKey);
+		res.set('Authorization', `Bearer ${token}`);
 		res.status(201).json(answer[0]);
 	} catch (e) {
 		console.log(e);
@@ -71,7 +70,6 @@ Router.get(
 				'SELECT id, username, fullname, email, mobile, address FROM users WHERE username = ? AND is_deleted = 0',
 				username
 			);
-			// if (!answer[0]) return res.sendStatus(404);		//! No hace falta comprobar...
 			res.send(answer);
 		} catch {
 			res.sendStatus(500);
@@ -130,8 +128,6 @@ Router.get(
 			let paramUsername = req.params.username;
 			let regex = new RegExp('^[\\w]+$');
 			if (!regex.test(paramUsername)) return res.sendStatus(400);
-			let query = `SELECT id FROM users WHERE username = "${paramUsername}" AND is_deleted = 0`;
-			// let answer = await sequelize.query(query);
 			let response;
 			await sequelize
 				.query(
