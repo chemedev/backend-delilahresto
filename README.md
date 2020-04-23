@@ -4,15 +4,11 @@
     -   [Prerequisites](#prerequisites)
     -   [Installation](#installation)
 -   [Usage](#usage)
--   [Roadmap](#roadmap)
--   [Contributing](#contributing)
--   [License](#license)
 -   [Contact](#contact)
--   [Acknowledgements](#acknowledgements)
 
 ## About The Project
 
-![GitHub Logo](/preview.png)
+![App Screenshot](/preview.png)
 
 En este proyecto se implementa una API REST con Node.js, su microframework Express y para el soporte de la información utilizamos la base de datos relacional MySQL.
 
