@@ -62,10 +62,16 @@ SQL_URI='ENTER_YOUR_CONNECTION_CREDENTIALS'
 npm run dev
 ```
 
+
 ## Usage
 
 En el directorio principal encontraran un spec.yaml y un postman.json para testear las rutas.
 También se puede acceder a http://localhost:3000 y http://localhost:3000/admin para probar las rutas con una interface semejante a los mock-ups enviados -BETA-.
+
+También se puede ver una versión de producción -BETA- servida en Heroku y RemoteMySQL.com:
+https://mechell-delilah.herokuapp.com/
+https://mechell-delilah.herokuapp.com/admin
+
 
 ## Contact
 
