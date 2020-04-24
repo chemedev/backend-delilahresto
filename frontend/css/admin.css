@@ -1,28 +1,37 @@
 .btnStatus {
-  display: inline-block;
-  background-color: crimson;
+  position: relative;
   padding-left: 1rem;
-  /* padding-top: 0.3rem; */
+  display: inline-block;
   color: #fff;
   font-size: 14px;
   line-height: 24px;
   text-align: left;
-  width: 120px;
+  width: 130px;
   height: 24px;
   border-radius: 20px;
   text-transform: uppercase;
   cursor: pointer;
+  text-align: left;
 }
 
-.btnStatus:hover {
-  background-color: brown;
+#btnTriangle {
+  position: absolute;
+  right: 10px;
+}
+
+#btnClose {
+  position: relative;
+  color: white;
+  font-size: 1.2rem;
+  right: -15rem;
+  padding: .3rem 1rem;
+  cursor: pointer;
 }
 
 .spanColumnTitle {
   color: grey;
   font-weight: 700;
   font-size: 14px;
-
 }
 
 .popup {
@@ -42,7 +51,6 @@
 
 .popup.active + .overlay {
   height: 100vh;
-  overflow: hidden;
   pointer-events: none;
   user-select: none;
   filter: blur(2px);

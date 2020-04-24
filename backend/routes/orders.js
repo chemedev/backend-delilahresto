@@ -1,5 +1,6 @@
 const express = require('express');
 const { sql, sequelize } = require('../database/database');
+const { QueryTypes } = require('sequelize');
 const Router = express.Router();
 const { isAdmin, isLogged, isAccesingOwnData } = require('../lib/helpers');
 
@@ -8,29 +9,46 @@ const { isAdmin, isLogged, isAccesingOwnData } = require('../lib/helpers');
 Router.post('/orders', isLogged, async (req, res) => {
 	try {
 		let answer;
-		let inserts = [];
+		let inserts = [],
+			prices = [];
 		let order = req.body;
+		order.total = 0;
 		sequelize.query(
 			`DELETE FROM favorites WHERE user_id = ${order.user_id}`
 		);
-		inserts.push(
-			sequelize
-				.query(
-					`INSERT INTO orders (payment_id, status_id, user_id) VALUES (${order.payment_id}, ${order.status_id}, ${order.user_id})`
-				)
-				.then((index) => {
-					answer = index[0];
-					order.items.forEach((item) => {
-						sequelize.query(
-							`INSERT INTO order_details (order_id, product_id, quantity) VALUES(${index[0]}, ${item.product_id}, ${item.quantity})`
-						);
-						sequelize.query(
-							`INSERT INTO favorites (user_id, product_id) VALUES (${order.user_id}, ${item.product_id})`
-						);
-					});
-					return null;
-				})
-		);
+		order.items.forEach((item) => {
+			prices.push(
+				sequelize
+					.query(
+						`SELECT price FROM products WHERE ${item.product_id} = id`,
+						{ type: QueryTypes.SELECT }
+					)
+					.then(
+						(answer) => (order.total += parseInt(answer[0].price))
+					)
+			);
+		});
+
+		Promise.all(prices).then(() => {
+			inserts.push(
+				sequelize
+					.query(
+						`INSERT INTO orders (payment_id, status_id, total, user_id) VALUES (${order.payment_id}, ${order.status_id}, ${order.total}, ${order.user_id})`
+					)
+					.then((index) => {
+						answer = index[0];
+						order.items.forEach((item) => {
+							sequelize.query(
+								`INSERT INTO order_details (order_id, product_id, quantity) VALUES(${index[0]}, ${item.product_id}, ${item.quantity})`
+							);
+							sequelize.query(
+								`INSERT INTO favorites (user_id, product_id) VALUES (${order.user_id}, ${item.product_id})`
+							);
+						});
+						return null;
+					})
+			);
+		});
 		Promise.all(inserts).then(async () => {
 			answer = await sql(`SELECT * FROM orders WHERE id = ?`, answer);
 			res.status(201).json(answer);
@@ -44,14 +62,15 @@ Router.post('/orders', isLogged, async (req, res) => {
 Router.get('/orders', isAdmin, async (_req, res) => {
 	try {
 		const answer = await sql(
-			`SELECT orders.id, products.description, orders.created_at, order_details.quantity, users.fullname, users.address, status.status, payment.method
+			`SELECT orders.id, orders.total, products.description, orders.created_at, order_details.quantity, users.fullname, users.address, status.status, payment.method
 										FROM users
 										JOIN orders ON orders.user_id = users.id
 										JOIN order_details ON orders.id = order_details.order_id
 										JOIN products ON order_details.product_id = products.id
 										JOIN status ON orders.status_id = status.id
 										JOIN payment ON orders.payment_id = payment.id
-										WHERE orders.is_deleted = 0;`
+                    WHERE orders.is_deleted = 0
+                    ORDER BY orders.created_at DESC;`
 		);
 		if (!answer[0]) return res.sendStatus(404);
 		let id = answer[0].id;
@@ -71,6 +90,7 @@ Router.get('/orders', isAdmin, async (_req, res) => {
 					address: order.address,
 					status: order.status,
 					payment: order.method,
+					total: order.total,
 				};
 			}
 			if (id != order.id) {
@@ -84,6 +104,7 @@ Router.get('/orders', isAdmin, async (_req, res) => {
 					address: order.address,
 					status: order.status,
 					payment: order.method,
+					total: order.total,
 				};
 				items.push({
 					description: order.description,
@@ -112,7 +133,7 @@ Router.get(
 			let regex = new RegExp('^[\\w]+$');
 			if (!regex.test(username)) return res.sendStatus(400);
 			const answer = await sql(
-				`SELECT orders.id, products.description, orders.created_at, order_details.quantity, users.fullname, status.status, payment.method
+				`SELECT orders.id, orders.total, products.description, orders.created_at, order_details.quantity, users.fullname, status.status, payment.method
 										FROM users
 										JOIN orders ON orders.user_id = users.id
 										JOIN order_details ON orders.id = order_details.order_id
@@ -139,6 +160,7 @@ Router.get(
 						user: order.fullname,
 						status: order.status,
 						payment: order.method,
+						total: order.total,
 					};
 				}
 				if (id != order.id) {
@@ -151,6 +173,7 @@ Router.get(
 						user: order.fullname,
 						status: order.status,
 						payment: order.method,
+						total: order.total,
 					};
 					items.push({
 						description: order.description,

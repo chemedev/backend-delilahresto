@@ -41,6 +41,7 @@ CREATE TABLE orders(
 	is_deleted TINYINT NOT NULL DEFAULT 0,
 	payment_id INT NOT NULL,
 	status_id INT NOT NULL,
+  total INT NOT NULL,
 	user_id INT NOT NULL,
 	PRIMARY KEY(id),
 	FOREIGN KEY(user_id) REFERENCES users(id),
@@ -85,4 +86,5 @@ VALUES
 ('Hamburguesa especial','/img/specialBurger.jpg',410.00,0);
 
 INSERT INTO users (username, password, fullname, email, mobile, address, is_admin)
-VALUES ('admin', 'admin', 'Root Admin', 'admin@delilah.com', '3419999999', 'Rosario', 1);
+VALUES ('admin', 'admin', 'Root Admin', 'admin@delilah.com', '3419999999', 'Rosario', 1),
+	('user', 'user', 'John User', 'user@email.com', '341111222333', 'Rosario', 0);
