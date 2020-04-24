@@ -1,8 +1,8 @@
 'use strict';
 
 document.addEventListener('DOMContentLoaded', async () => {
-	// var FETCH_URI = 'http://localhost:3000';
-	var FETCH_URI = 'https://mechell-delilah.herokuapp.com';
+	var FETCH_URI = 'http://localhost:3000';
+	// var FETCH_URI = 'https://mechell-delilah.herokuapp.com';
 
 	let dishesCount = 0;
 	let order = [];
