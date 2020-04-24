@@ -3692,9 +3692,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var ordersContainer = document.getElementById('orders-container');
 var spanDate = document.getElementById('span-date');
-var popup = document.getElementById('popup'); // var FETCH_URI = 'http://localhost:3000';
+var popup = document.getElementById('popup');
+var FETCH_URI = 'http://localhost:3000'; // var FETCH_URI = 'https://mechell-delilah.herokuapp.com';
 
-var FETCH_URI = 'https://mechell-delilah.herokuapp.com';
 var now = new Date().toLocaleDateString('es-AR', {
   weekday: 'long',
   month: 'long',
@@ -3890,7 +3890,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63215" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63768" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

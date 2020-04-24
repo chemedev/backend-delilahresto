@@ -4688,8 +4688,8 @@ document.addEventListener('DOMContentLoaded', /*#__PURE__*/(0, _asyncToGenerator
             return _loadDishes.apply(this, arguments);
           };
 
-          // var FETCH_URI = 'http://localhost:3000';
-          FETCH_URI = 'https://mechell-delilah.herokuapp.com';
+          FETCH_URI = 'http://localhost:3000'; // var FETCH_URI = 'https://mechell-delilah.herokuapp.com';
+
           dishesCount = 0;
           order = [];
           headers = {
@@ -5097,7 +5097,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63215" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63768" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
