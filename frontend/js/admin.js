@@ -2,8 +2,9 @@ const ordersContainer = document.getElementById('orders-container');
 const spanDate = document.getElementById('span-date');
 const popup = document.getElementById('popup');
 
-var FETCH_URI = 'http://localhost:3000';
+// var FETCH_URI = 'http://localhost:3000';
 // var FETCH_URI = 'https://mechell-delilah.herokuapp.com';
+var FETCH_URI = 'https://delilah-resto.azurewebsites.net';
 
 let now = new Date()
 	.toLocaleDateString('es-AR', {
