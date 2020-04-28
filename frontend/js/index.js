@@ -2,7 +2,8 @@
 
 document.addEventListener('DOMContentLoaded', async () => {
 	// var FETCH_URI = 'http://localhost:3000';
-	var FETCH_URI = 'https://mechell-delilah.herokuapp.com';
+	// var FETCH_URI = 'https://mechell-delilah.herokuapp.com';
+	var FETCH_URI = 'https://delilah-resto.azurewebsites.net';
 
 	let dishesCount = 0;
 	let order = [];
