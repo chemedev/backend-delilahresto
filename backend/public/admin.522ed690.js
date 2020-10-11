@@ -3694,6 +3694,7 @@ var ordersContainer = document.getElementById('orders-container');
 var spanDate = document.getElementById('span-date');
 var popup = document.getElementById('popup');
 var FETCH_URI = 'http://localhost:3000'; // var FETCH_URI = 'https://mechell-delilah.herokuapp.com';
+// var FETCH_URI = 'https://delilah-resto.azurewebsites.net';
 
 var now = new Date().toLocaleDateString('es-AR', {
   weekday: 'long',
@@ -3890,7 +3891,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63768" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "37765" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
